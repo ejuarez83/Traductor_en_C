@@ -472,7 +472,7 @@ void menu (){
 	int resp;
 	do{
 		cout<<"######################################################################"<<endl;
-		cout<<"##                     Menu Principal                                #"<<endl;
+		cout<<"##                     Menu Principal      DEV MODE                          #"<<endl;
 		cout<<"######################################################################"<<endl;
 		cout<<""<<endl;
 		cout<<"             [1] Traducir palabra                                      "<<endl;
@@ -493,7 +493,7 @@ void menu (){
 //Metodo principal para llamar las distintas funciones
 int main() {
 	defaults();
-	system("pause");
+	//system("pause");
 	//fullscreen();
 	//intro();
 	carga_diccionario();
