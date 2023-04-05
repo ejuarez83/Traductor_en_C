@@ -14,6 +14,8 @@
 #include <locale.h> // Libreria que contiene la funcion setlocales
 #include <cctype>
 #include <bits/stdc++.h>
+#include <sstream>
+#include <vector>
 
 /// Aqui se definen las variables locales
 std::string path ="..\\voices\\"; //path de archivos de audio
@@ -21,6 +23,13 @@ std::string diccionario_file ="..\\diccionario.txt"; //path de archivo de diccio
 std::string user_profiles ="";//path de user profiles
 int correlativo=0; //variable de correlativo global
 std::string diccionario_a[5][1000]; //array de 5 columnas por 1000 filas
+struct Palabra {
+    std::string espanol;
+    std::string italiano;
+    std::string frances;
+    std::string aleman;
+    std::string ingles;
+};
 using namespace std;
 
 
@@ -33,7 +42,7 @@ void defaults(){
 	ifstream archivo(nombreArchivo.c_str());
 	string linea;
 	int icontador=0;
-	// Obtener línea de archivo, y almacenar contenido en "linea"
+	// Obtener lÃ­nea de archivo, y almacenar contenido en "linea"
 	getline(archivo, linea);
 	stringstream ss(linea);  
     string word;
@@ -47,12 +56,159 @@ void defaults(){
 	//cout<<"correlativo: "<<correlativo<<" path de audio "<<path<<" diccionario: "<<diccionario_file<<endl;
 }
 
-//Funcion para cargar el diccionario a estructuras
 // Kenny Saenz aqui va tu parte
+//Declarar el variable palabras de tipo PALABRA
+int buscarpalabra(){
+	std::vector<Palabra> palabras;
+    std::ifstream archivo("palabras.txt");
+	//Apertura de archivo y lectura de datos
+    if (archivo.is_open()) {
+        std::string linea;
+        while (std::getline(archivo, linea)) {
+            std::istringstream ss(linea);
+            Palabra palabra;
+            std::getline(ss, palabra.espanol, ',');
+            std::getline(ss, palabra.italiano, ',');
+            std::getline(ss, palabra.frances, ',');
+            std::getline(ss, palabra.aleman, ',');
+            std::getline(ss, palabra.ingles, ',');
+            palabras.push_back(palabra);
+        }
+        archivo.close();
+    } else {
+        std::cout << "No se pudo abrir el archivo" << std::endl;
+        return 1;
+    }
+    //Busqueda de palabras en el archivo
+	std::string palabra;
+    int indice_idioma;
 
-///// Esto es temporal mientras se integra la parte de Kenny
+    std::cout << "Ingrese la palabra a buscar: ";
+    std::cin >> palabra;
+    std::cout << "ingrese el idioma [1] espaÃ±ol [2] ingles [3] aleman [4] frances [5] italiano ";
+    std::cin >> indice_idioma;
 
-void carga_diccionario(){
+    for (int i = 0; i < palabras.size(); i++) {
+		if (palabras[i].espanol == palabra) {
+            switch (indice_idioma) {
+                case 1:
+                    std::cout << palabras[i].espanol << std::endl;
+                    break;
+                case 2:
+                    std::cout << palabras[i].italiano << std::endl;
+                    break;
+                case 3:
+                    std::cout << palabras[i].frances << std::endl;
+                    break;
+                case 4:
+                    std::cout << palabras[i].aleman << std::endl;
+                    break;
+                case 5:
+                    std::cout << palabras[i].ingles << std::endl;
+                    break;
+                default:
+                    std::cout << "Indice de idioma invalido" << std::endl;
+                    break;
+                    
+            	}break;
+			}else if (palabras[i].italiano== palabra){
+            switch (indice_idioma) {
+                case 1:
+                    std::cout << palabras[i].espanol << std::endl;
+                    break;
+                case 2:
+                    std::cout << palabras[i].italiano << std::endl;
+                    break;
+                case 3:
+                    std::cout << palabras[i].frances << std::endl;
+                    break;
+                case 4:
+                    std::cout << palabras[i].aleman << std::endl;
+                    break;
+                case 5:
+                    std::cout << palabras[i].ingles << std::endl;
+                    break;
+                default:
+                    std::cout << "El numero de idioma colocado no es valido" << std::endl;
+                    break;
+                    
+            }
+            break;
+        }else if (palabras[i].frances == palabra){
+        	switch (indice_idioma) {
+                case 1:
+                    std::cout << palabras[i].espanol << std::endl;
+                    break;
+                case 2:
+                    std::cout << palabras[i].italiano << std::endl;
+                    break;
+                case 3:
+                    std::cout << palabras[i].frances << std::endl;
+                    break;
+                case 4:
+                    std::cout << palabras[i].aleman << std::endl;
+                    break;
+                case 5:
+                    std::cout << palabras[i].ingles << std::endl;
+                    break;
+                default:
+                    std::cout << "El numero de idioma colocado no es valido" << std::endl;
+                    break;
+                    
+            }
+            break;
+		}else if(palabras[i].aleman == palabra){
+			switch (indice_idioma) {
+                case 1:
+                    std::cout << palabras[i].espanol << std::endl;
+                    break;
+                case 2:
+                    std::cout << palabras[i].italiano << std::endl;
+                    break;
+                case 3:
+                    std::cout << palabras[i].frances << std::endl;
+                    break;
+                case 4:
+                    std::cout << palabras[i].aleman << std::endl;
+                    break;
+                case 5:
+                    std::cout << palabras[i].ingles << std::endl;
+                    break;
+                default:
+                    std::cout << "El numero de idioma colocado no es valido" << std::endl;
+                    break;
+                    
+            }
+            break;
+		}else if (palabras[i].ingles == palabra){
+			switch (indice_idioma) {
+                case 1:
+                    std::cout << palabras[i].espanol << std::endl;
+                    break;
+                case 2:
+                    std::cout << palabras[i].italiano << std::endl;
+                    break;
+                case 3:
+                    std::cout << palabras[i].frances << std::endl;
+                    break;
+                case 4:
+                    std::cout << palabras[i].aleman << std::endl;
+                    break;
+                case 5:
+                    std::cout << palabras[i].ingles << std::endl;
+                    break;
+                default:
+                    std::cout << "El numero de idioma colocado no es valido" << std::endl;
+                    break;
+                    
+            }
+            break;
+		}
+   	 }
+    	
+}
+
+/*void carga_diccionario(){
 	setlocale(LC_ALL, ""); 
 	//string nombreArchivo = "c:\\temp\\config.cfg";
 	//cout<<"archivo de configuracion: "<<diccionario_file<<endl;
@@ -94,7 +250,7 @@ void carga_diccionario(){
 		}
 	}
 	//system("pause");
-}
+}*/
 
 //Funcion para generar audios desde AWS Polly y luego de descargarlo en MP3 lo convierte en WAV
 string aws_audio(int index, string word, int wordindex, string palabra){
@@ -102,7 +258,7 @@ string aws_audio(int index, string word, int wordindex, string palabra){
 	std::string fullPath = path;
 	std::string genfullPath = path;
 	//En base a la sesleccion asigna la carpeta del idioma
-	if (index==0) fullPath +="spanish\\"; //Español
+	if (index==0) fullPath +="spanish\\"; //EspaÃ±ol
 	if (index==1) fullPath+="english\\"; //Ingles
 	if (index==2) fullPath+="german\\"; //Aleman
 	if (index==3) fullPath+="french\\"; //Frances
@@ -116,7 +272,7 @@ string aws_audio(int index, string word, int wordindex, string palabra){
 	//string str = to_string(wordindex;
 	//evalua el idioma para construir el string
 	comando="aws polly synthesize-speech --output-format mp3 --voice-id ";
-	if (index==0) comando +="Penelope"; //Español
+	if (index==0) comando +="Penelope"; //EspaÃ±ol
 	if (index==1) comando +="Salli"; //Ingles
 	if (index==2) comando +="Vicki"; //Aleman
 	if (index==3) comando +="Lea"; //Frances
@@ -170,7 +326,7 @@ void play(int index, string word, string palabra){
 	//cout<<word<<" la palabra"<<endl;
 	//system("pause");
 	//En base a la sesleccion asigna la carpeta del idioma
-	if (index==0) fullPath +="spanish\\"; //Español
+	if (index==0) fullPath +="spanish\\"; //EspaÃ±ol
 	if (index==1) fullPath+="english\\"; //Ingles
 	if (index==2) fullPath+="german\\"; //Aleman
 	if (index==3) fullPath+="french\\"; //Frances
@@ -189,7 +345,7 @@ void play(int index, string word, string palabra){
 	else {
 		//cout<<" no aparece el archivo"<<" Correlativo es "<<correlativo<<endl;
 		iresp=aws_audio(index,word,correlativo,palabra);
-		//No lo encontró
+		//No lo encontrÃ³
 		fullPath=iresp;
 		//fullPath+=iresp;
 		//fullPath+=".wav";
@@ -219,7 +375,7 @@ void traduce (){
 	
 	cout<<"Ingrese la palabra a decir: "<<endl;
 	cin>>palabra;
-	cout<<"ingrese el idioma [0] español [1] ingles [2] aleman [3] frances [4] italiano"<<endl;
+	cout<<"ingrese el idioma [0] espaÃ±ol [1] ingles [2] aleman [3] frances [4] italiano"<<endl;
 	cin>>respuesta;
 	play(respuesta, "404", palabra);
 	system("pause");
@@ -236,10 +392,10 @@ void traduce (){
 		cout<<"###########################################################"<<endl;
 		cout<<" Selecciona el idioma "<<endl;
 		cout<<endl;
-		cout<<" [1] Español"<<endl;
-		cout<<" [2] Inglés"<<endl;
-		cout<<" [3] Alemán"<<endl;
-		cout<<" [4] Francés"<<endl;
+		cout<<" [1] EspaÃ±ol"<<endl;
+		cout<<" [2] InglÃ©s"<<endl;
+		cout<<" [3] AlemÃ¡n"<<endl;
+		cout<<" [4] FrancÃ©s"<<endl;
 		cout<<" [5] Italiano"<<endl;
 		cout<<" [0] Salir"<<endl;
 		cin>>respuesta;
@@ -254,18 +410,18 @@ void traduce (){
 				if(diccionario_a[i]) {
 					
 					word=i;
-					if (word==0) cout<<"La palabra esta en Español y sera traducida al ";
-					if (word==1) cout<<"La palabra esta en Inglés y sera traducida al ";
-					if (word==2) cout<<"La palabra esta en Alemán y sera traducida al ";
-					if (word==3) cout<<"La palabra esta en Francés y sera traducida al ";
+					if (word==0) cout<<"La palabra esta en EspaÃ±ol y sera traducida al ";
+					if (word==1) cout<<"La palabra esta en InglÃ©s y sera traducida al ";
+					if (word==2) cout<<"La palabra esta en AlemÃ¡n y sera traducida al ";
+					if (word==3) cout<<"La palabra esta en FrancÃ©s y sera traducida al ";
 					if (word==4) cout<<"La palabra esta en Italiano y sera traducida al ";
 					
-					if (respuesta-1==0) cout<<"Español"<<endl;
-					if (respuesta-1==1) cout<<"Inglés"<<endl;
-					if (respuesta-1==2) cout<<"Alemán"<<endl;
-					if (respuesta-1==3) cout<<"Francés"<<endl;
+					if (respuesta-1==0) cout<<"EspaÃ±ol"<<endl;
+					if (respuesta-1==1) cout<<"InglÃ©s"<<endl;
+					if (respuesta-1==2) cout<<"AlemÃ¡n"<<endl;
+					if (respuesta-1==3) cout<<"FrancÃ©s"<<endl;
 					if (respuesta-1==4) cout<<"Italiano"<<endl;
-					if (word!=0) {//La palabra esta en otro idioma y la traducimos al español
+					if (word!=0) {//La palabra esta en otro idioma y la traducimos al espaÃ±ol
 						word = 0;	
 					}
 					translation=palabras1[respuesta-1];
@@ -274,18 +430,18 @@ void traduce (){
 				if(palabras2[i]== palabra) {
 					word=i;
 					cout<<"palabra encontrada..."<<word<<endl;
-					if (word==0) cout<<"La palabra esta en Español y sera traducida al ";
-					if (word==1) cout<<"La palabra esta en Inglés y sera traducida al ";
-					if (word==2) cout<<"La palabra esta en Alemán y sera traducida al ";
-					if (word==3) cout<<"La palabra esta en Francés y sera traducida al ";
+					if (word==0) cout<<"La palabra esta en EspaÃ±ol y sera traducida al ";
+					if (word==1) cout<<"La palabra esta en InglÃ©s y sera traducida al ";
+					if (word==2) cout<<"La palabra esta en AlemÃ¡n y sera traducida al ";
+					if (word==3) cout<<"La palabra esta en FrancÃ©s y sera traducida al ";
 					if (word==4) cout<<"La palabra esta en Italiano y sera traducida al ";
 					
-					if (respuesta-1==0) cout<<"Español"<<endl;
-					if (respuesta-1==1) cout<<"Inglés"<<endl;
-					if (respuesta-1==2) cout<<"Alemán"<<endl;
-					if (respuesta-1==3) cout<<"Francés"<<endl;
+					if (respuesta-1==0) cout<<"EspaÃ±ol"<<endl;
+					if (respuesta-1==1) cout<<"InglÃ©s"<<endl;
+					if (respuesta-1==2) cout<<"AlemÃ¡n"<<endl;
+					if (respuesta-1==3) cout<<"FrancÃ©s"<<endl;
 					if (respuesta-1==4) cout<<"Italiano"<<endl;
-					//if (word!=0) {//La palabra esta en otro idioma y la traducimos al español
+					//if (word!=0) {//La palabra esta en otro idioma y la traducimos al espaÃ±ol
 						word = 1;	
 					//}
 					translation=palabras2[respuesta-1];
@@ -356,7 +512,7 @@ void cifrado(string palabra){
 	string linea;
 	
 	
-	// Obtener línea de archivo, y almacenar contenido en "linea"
+	// Obtener lÃ­nea de archivo, y almacenar contenido en "linea"
 	getline(archivo, linea);
     //cout<<"Dato original: "<<palabra<<endl;
     k1=linea[0];
@@ -484,7 +640,7 @@ void menu (){
 		cin>>resp;
 		if(resp==1) traduce();
 		if(resp==2) agrega();
-		if(resp==3) diccionario();
+		if(resp==3) buscarpalabra();
 		
 	}while(resp==0);
 	salida();
@@ -496,7 +652,7 @@ int main() {
 	//system("pause");
 	//fullscreen();
 	//intro();
-	carga_diccionario();
+	//carga_diccionario();
 	menu();
 	string palabra;
 	cout<<"Por favor ingrese la palabra a cifrar"<<endl;
