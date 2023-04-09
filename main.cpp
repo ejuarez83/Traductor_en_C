@@ -16,8 +16,8 @@
 #include <bits/stdc++.h>
 
 /// Aqui se definen las variables locales
-std::string path ="..\\voices\\"; //path de archivos de audio
-std::string diccionario_file ="..\\diccionario.txt"; //path de archivo de diccionario
+std::string path =".\\voices\\"; //path de archivos de audio
+std::string diccionario_file =".\\diccionario.txt"; //path de archivo de diccionario
 std::string user_profiles ="";//path de user profiles
 int correlativo=0; //variable de correlativo global
 std::string diccionario_a[5][1000]; //array de 5 columnas por 1000 filas
@@ -472,7 +472,7 @@ void menu (){
 	int resp;
 	do{
 		cout<<"######################################################################"<<endl;
-		cout<<"##                     Menu Principal                                #"<<endl;
+		cout<<"##                     Menu Principal      DEV MODE                          #"<<endl;
 		cout<<"######################################################################"<<endl;
 		cout<<""<<endl;
 		cout<<"             [1] Traducir palabra                                      "<<endl;
@@ -493,7 +493,7 @@ void menu (){
 //Metodo principal para llamar las distintas funciones
 int main() {
 	defaults();
-	system("pause");
+	//system("pause");
 	//fullscreen();
 	//intro();
 	carga_diccionario();
