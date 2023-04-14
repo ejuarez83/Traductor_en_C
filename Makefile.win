@@ -4,8 +4,9 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = main.o
-LINKOBJ  = main.o
+RES      = Traductor_private.res
+OBJ      = main.o $(RES)
+LINKOBJ  = main.o $(RES)
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/boost" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/lib/boost_1_81_0" -L"C:/lib/boost_1_81_0/" -lwinmm "../../../../../../../../../Program Files (x86)/Dev-Cpp/MinGW64/lib/boost/algorithm/string.hpp" -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/boost" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -I"C:/lib/boost_1_81_0" -I"C:/lib/boost_1_81_0/"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/boost" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -I"C:/lib/boost_1_81_0" -I"C:/lib/boost_1_81_0/"
@@ -26,3 +27,7 @@ $(BIN): $(OBJ)
 
 main.o: main.cpp
 	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+Traductor_private.res: Traductor_private.rc 
+	$(WINDRES) -i Traductor_private.rc --input-format=rc -o Traductor_private.res -O coff  --include-dir C:/PROGRA~2/Dev-Cpp/MinGW64/lib/boost --include-dir C:/PROGRA~2/Dev-Cpp/MinGW64/lib --include-dir C:/lib/boost_1_81_0 --include-dir C:/lib/boost_1_81_0/
+
