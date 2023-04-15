@@ -11,6 +11,7 @@
 #include <ctime>
 #include <Mmsystem.h>
 #if defined(_MSC_VER)
+//librerias para audio
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "shlwapi.lib")
 #endif
@@ -346,11 +347,7 @@ string aws_audio(int index, string word, int wordindex, string palabra){
 void play(int index, string word, string palabra){
 	string iresp;
 	std::string fullPath = path;
-	/*if(index == 0) system("del /Q c:\\lib\\voices\\spanish\\200.wav > nul");
-	if(index == 1) system("del /Q c:\\lib\\voices\\english\\200.wav > nul");
-	if(index == 2) system("del /Q c:\\lib\\voices\\french\\200.wav > nul");
-	if(index == 3) system("del /Q c:\\lib\\voices\\german\\200.wav > nul");
-	if(index == 4) system("del /Q c:\\lib\\voices\\italian\\200.wav > nul");*/
+	
 	
 	if(word=="404") word+="1";
 	//cout<<" inicia rutina de reproduccion de audio"<<endl;
