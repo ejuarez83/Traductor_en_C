@@ -12,4 +12,5 @@ estos son audios de menu
 
 3. Si se desea recompilar se debe tener instalado Boost como libreria
 4. Para correrlo se debe tener instalado el interprete de python 3.10 en adelante
-5. Se debe usar toda la carpeta del proyecto.
+5. Se debe agregar en el linker del proyecto -lwinmm
+6. Se debe usar toda la carpeta del proyecto.
