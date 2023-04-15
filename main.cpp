@@ -288,12 +288,12 @@ string aws_audio(int index, string word, int wordindex, string palabra){
 	genfullPath=fullPath; //
 	stringstream ss;  
 	///////ss<<wordindex+1;  
-	ss<<wordindex;  
+	ss<<wordindex+1;  
 	string s;  
 	ss>>s; 
 	//string str = to_string(wordindex;
 	//evalua el idioma para construir el string
-	//comando="aws polly synthesize-speech --output-format mp3 --voice-id ";
+	comando="aws polly synthesize-speech --output-format mp3 --voice-id ";
 	if (index==0) comando +="Penelope"; //Espa√±ol
 	if (index==1) comando +="Salli"; //Ingles
 	if (index==2) comando +="Vicki"; //Aleman
@@ -317,20 +317,20 @@ string aws_audio(int index, string word, int wordindex, string palabra){
 	//manda a generar el audio de aws
 	system(c);
 	//cout<<"el path completo es: "<<s<<endl;
-	comando="ffmpeg -hide_banner -log_level error -i ";
+	comando="ffmpeg -y -loglevel quiet -i ";
 	comando+=genfullPath;
 	comando+=s;
 	comando+=".mp3 ";
 	comando+=genfullPath;
 	comando+=s;
-	comando+=".wav > nul";
-	//cout<<comando<<endl;
+	comando+=".wav ";
+	//out<<comando<<endl;
 	//system("pause");
 	const char * c1 = comando.c_str();
 	//Convierte mp3 a Wav
 	system(c1);
 	//devuelve  el valor en la rutina
-	correlativo+=1;
+	//correlativo+=1;
 	genfullPath+=s;
 	genfullPath+=".wav";
 	return genfullPath;
@@ -346,6 +346,12 @@ string aws_audio(int index, string word, int wordindex, string palabra){
 void play(int index, string word, string palabra){
 	string iresp;
 	std::string fullPath = path;
+	/*if(index == 0) system("del /Q c:\\lib\\voices\\spanish\\200.wav > nul");
+	if(index == 1) system("del /Q c:\\lib\\voices\\english\\200.wav > nul");
+	if(index == 2) system("del /Q c:\\lib\\voices\\french\\200.wav > nul");
+	if(index == 3) system("del /Q c:\\lib\\voices\\german\\200.wav > nul");
+	if(index == 4) system("del /Q c:\\lib\\voices\\italian\\200.wav > nul");*/
+	
 	if(word=="404") word+="1";
 	//cout<<" inicia rutina de reproduccion de audio"<<endl;
 	//cout<<word<<" la palabra "<<palabra<<endl;
@@ -392,6 +398,7 @@ void play(int index, string word, string palabra){
 	//cout<<"path ->"<<folder<<endl;
 	ires=PlaySound(folder, NULL, SND_FILENAME); //SND_FILENAME or SND_LOOP
 	//cout<<"respuesta: "<<ires<<endl;
+	
 }
 
 //sirvio para generar los audios en batch
@@ -783,24 +790,29 @@ int buscarpalabra(){
 				comando+=" >output.txt";
 				
 		   	 	const char * c1 = comando.c_str();
-		   	 	gotoxy(50,21);
+		   	 	gotoxy(50,22);
 		   	 	palabra_traducida=system(c1);
 		   	 	std::ifstream archivo("output.txt");
 		   	 	std::getline(archivo, palabra_traducida);
 		   	 	palabra=system(c1);
-		   	 	cout<<palabra_traducida<<endl;
+		   	 	cout<<"Su palabra se escribe: "<<palabra_traducida<<endl;
+		   	 	
 		   	 	stringstream ss;
 				ss<<correlativo;
 				ss>>s; 
 				
+				
+				
 				} 
+				gotoxy(50,24);
+				cout<<"Y se pronuncia..."<<endl;
 				//cout<<"veamos la palabra traducida antes del trim "<<palabra<<endl;
 				boost::trim_left( palabra_traducida );
 				//cout<<"veamos la palabra traducida"<<endl;
 				//cout<<"el indice de la palabra es : "<<s<<"la palabra es: "<<palabra_traducida<<endl;
 				//system("pause");
 				play(indice_idioma-1, s, palabra_traducida);
-		   gotoxy(50,23);
+		   gotoxy(50,26);
 		   system("pause"); 
 		   
 			}
@@ -812,6 +824,7 @@ int buscarpalabra(){
 
 void intro(){
 	system("cls");
+	system("color 0a");
 	gotoxy(50,10);
 	cout<<"UNIVERSIDAD MARIANO GALVEZ DE GUATEMALA"<<endl;
 	gotoxy(50,11);
@@ -859,6 +872,7 @@ void intro(){
 void Diccionario(){
 	//se usa para poder utilizar los caracteres como Ò, tildes, etc.
 	setlocale(LC_ALL, ""); 
+	system("color 0a");
 	string s;
 	std::vector<Palabra> palabras;
     std::ifstream archivo("palabras.txt");
@@ -1251,6 +1265,15 @@ void menu2 (){
 
 //Metodo principal para llamar las distintas funciones
 int main() {
+	
+	//limpia archivos 2??.wav para evitar problemas
+	system("del c:\\lib\\voices\\200.wav /s");
+	system("del c:\\lib\\voices\\201.wav /s");
+	system("del c:\\lib\\voices\\202.wav /s");
+	system("del c:\\lib\\voices\\203.wav /s");
+	system("del c:\\lib\\voices\\204.wav /s");
+	system("del c:\\lib\\voices\\205.wav /s");
+	system("cls");
 	fullscreen();
 	//defaults();
 	//buscarpalabra();
