@@ -34,19 +34,10 @@ std::string user_profiles ="";//path de user profiles
 int correlativo=200; //variable de correlativo global
 std::string diccionario_a[5][1000]; //array de 5 columnas por 1000 filas
 bool menu_sound=false;
-//Se define estructura para cada idioma
-struct Palabra {
-    std::string espanol;
-    std::string italiano;
-    std::string frances;
-    std::string aleman;
-    std::string ingles;
-};
 //Se usa boost para funciones de cadenas
 
 using namespace boost::algorithm;
 using namespace std;
-
 void gotoxy(int x,int y){  
       HANDLE hcon;  
       hcon = GetStdHandle(STD_OUTPUT_HANDLE);  
@@ -55,6 +46,685 @@ void gotoxy(int x,int y){
       dwPos.Y= y;  
       SetConsoleCursorPosition(hcon,dwPos);  
  }  
+
+//Funcion para generar audios desde AWS Polly y luego de descargarlo en MP3 lo convierte en WAV
+string aws_audio(int index, string word, int wordindex, string palabra){
+	std::string comando; 
+	std::string fullPath = path;
+	std::string genfullPath = path;
+	
+	//cout<<"va a generar el archivo desde polly"<<endl;
+	//system("pause");
+	//En base a la sesleccion asigna la carpeta del idioma
+	if (index==0) fullPath +="spanish\\"; //Español
+	if (index==1) fullPath+="english\\"; //Ingles
+	if (index==2) fullPath+="german\\"; //Aleman
+	if (index==3) fullPath+="french\\"; //Frances
+	if (index==4) fullPath+="italian\\"; //Italiano
+	//Toma el path generico y se guarda por aparte
+	genfullPath=fullPath; //
+	stringstream ss;  
+	///////ss<<wordindex+1;  
+	ss<<wordindex+1;  
+	string s;  
+	ss>>s; 
+	//string str = to_string(wordindex;
+	//evalua el idioma para construir el string
+	comando="aws polly synthesize-speech --output-format mp3 --voice-id ";
+	if (index==0) comando +="Penelope"; //Español
+	if (index==1) comando +="Salli"; //Ingles
+	if (index==2) comando +="Vicki"; //Aleman
+	if (index==3) comando +="Lea"; //Frances
+	if (index==4) comando +="Bianca"; //Italiano
+	
+	fullPath+=s;
+	fullPath+=".mp3";
+	comando+=" --text '";
+	comando+=palabra;
+	comando+="' ";
+	comando+=fullPath;
+	comando+=" > nul"; //volver a poner para capturar el output
+	//cout<<" ya debio haber generado el archivo"<<endl;
+	//cout<<" path: "<<fullPath<<endl;
+	//cout<<" el comando es: "<<comando<<endl;
+	//cout<<comando<<endl;
+	//system("pause");
+	//std::string str;
+	const char * c = comando.c_str();
+	//manda a generar el audio de aws
+	system(c);
+	//cout<<"el path completo es: "<<s<<endl;
+	comando="ffmpeg -y -loglevel quiet -i ";
+	comando+=genfullPath;
+	comando+=s;
+	comando+=".mp3 ";
+	comando+=genfullPath;
+	comando+=s;
+	comando+=".wav ";
+	//out<<comando<<endl;
+	//system("pause");
+	const char * c1 = comando.c_str();
+	//Convierte mp3 a Wav
+	system(c1);
+	//devuelve  el valor en la rutina
+	//correlativo+=1;
+	genfullPath+=s;
+	genfullPath+=".wav";
+	return genfullPath;
+	//comando=palabra+".mp3";
+	//const char * c2 = comando.c_str();
+	
+	//system(c2);
+	//system("pause");
+	//word=403;	
+}
+
+//Funcion para reproducir sonidos
+void play(int index, string word, string palabra){
+	string iresp;
+	std::string fullPath = path;
+	
+	
+	if(word=="404") word+="1";
+	//cout<<" inicia rutina de reproduccion de audio"<<endl;
+	//cout<<word<<" la palabra "<<palabra<<endl;
+	//system("pause");
+	//En base a la sesleccion asigna la carpeta del idioma
+	if (index==0) fullPath +="spanish\\"; //Español
+	if (index==1) fullPath+="english\\"; //Ingles
+	if (index==3) fullPath+="german\\"; //Aleman
+	if (index==2) fullPath+="french\\"; //Frances
+	if (index==4) fullPath+="italian\\"; //Italiano
+	
+	fullPath += word;
+	fullPath += ".wav";
+	string archivo=fullPath;
+	
+	string nombreArchivo = archivo;
+	ifstream archivo1(nombreArchivo.c_str());
+	//file = fopen(archivo, "w");
+	if(archivo1){
+		//Todo OK y se reproduce el archivo
+	}
+	else {
+		
+		//cout<<" no aparece el archivo"<<" Correlativo es "<<correlativo<<" y la palabra es: "<<palabra<<endl;
+		//system("pause");
+        iresp=aws_audio(index,word,correlativo,palabra);
+		stringstream ss; 
+   		//string str = "7";
+	    int num;
+	   	ss << word;
+	   	ss >> num;
+	   	
+		//iresp=aws_audio(index,word,num,palabra);
+		//No lo encontró
+		fullPath=iresp;
+		//fullPath+=iresp;
+		//fullPath+=".wav";
+		//cout<<fullPath<<" path del archivo -- respuesta de funcion: "<<iresp<<endl;
+		//system("pause");
+		//system("cls");
+	}
+	const char *folder = fullPath.c_str();
+	int ires;
+	//cout<<"path ->"<<folder<<endl;
+	ires=PlaySound(folder, NULL, SND_FILENAME); //SND_FILENAME or SND_LOOP
+	//cout<<"respuesta: "<<ires<<endl;
+	
+}
+
+//// SE AGREGA LA ESTRUCTURA DE ARBOL AVL
+
+class avl
+{	//int index;
+	char index[4],spanish[20],english[20],french[20],german[20],italian[20];
+	avl *left,*right;
+	int ht;
+public:
+	avl* create(avl *root);
+	avl* insert(avl *root,char index[],char spanish[], char english[], char french[], char german[], char italian[]);
+	void display(avl*);
+	int height(avl*);
+	avl* rotateright(avl*);
+	avl* rotateleft(avl*);
+	int BF(avl*);
+	avl* Delete(avl*,char*);
+	avl* RR(avl*);
+	avl*LL(avl*);
+	avl*LR(avl*);
+	avl*RL(avl*);
+	avl* mirror(avl*);
+	avl* update(avl*);
+};
+
+//Crea el arbol a nivel global para poderse usar
+avl d,*root,*root1;
+
+	
+avl* avl::create(avl *root)
+{	int n_o,i;
+	char index[4], w[20],m[20],n[20],o[20],p[20];
+	root=insert(root,index,w,m,n,o,p);
+	/*
+	cout<<"\n Enter the number spanishs:\t";
+	cin>>n_o;
+	for(i=0;i<n_o;i++)
+	{	cout<<"\n Enter the "<<i+1<<" spanish";
+		cin>>w;
+		cout<<"\n Enter the english:";
+		cin>>m;
+		cout<<"\n Enter the french:";
+		cin>>n;
+		cout<<"\n Enter the german:";
+		cin>>o;
+		cout<<"\n Enter the italian:";
+		cin>>p;
+		root=insert(root,w,m,n,o,p);
+	}*/
+	return root;
+}
+
+avl* avl::insert(avl *root,char index[] , char w[],char m[],char n[], char o[], char p[])
+{	if(root==NULL)
+	{	root=new avl;
+		strcpy(root->index,index);
+		strcpy(root->spanish,w);
+		strcpy(root->english,m);
+		strcpy(root->french,n);
+		strcpy(root->german,o);
+		strcpy(root->italian,p);
+		root->left=NULL;
+		root->right=NULL;
+		return root;
+	}
+    else
+    {
+	  if(strcmp(w,root->spanish)>0)
+	  {
+		root->right=insert(root->right,index,w,m,n,o,p);
+		if(BF(root)==2)
+		{
+			if(strcmp(w,root->spanish)>=0)
+				root=RR(root);
+			else
+				root=RL(root);
+		}
+
+	  }
+	  else
+	  {
+		  if(strcmp(w,root->spanish)<0)
+		  {
+		  		root->left=insert(root->left,index,w,m,n,o,p);
+		  		if(BF(root)==-2)
+		  		{
+		  			if(strcmp(w,root->spanish)<=0)
+		  				root=LL(root);
+		  			else
+		  				root=LR(root);
+		  		}
+		  }
+	   }
+	}
+	root->ht=height(root);
+	return root;
+}
+
+void avl::display(avl* root)
+{	//cout<<"===========================================================\n"<<endl;
+	//cout<<"=                           =                              \n"<<endl;
+	if (root!=NULL)
+	{	display(root->left);
+		cout<<"\n"<<root->spanish<<" - "<<root->english<<" - "<<root->french <<" - "<<root->german<<" - "<<root->italian;
+		display(root->right);
+	}
+}
+
+int avl::height(avl *root)
+{
+	int lh,rh;
+	if(root==NULL)
+		return 0;
+	if(root->left==NULL)
+		lh=0;
+	else
+		lh=1+root->left->ht;
+
+	if(root->right==NULL)
+		rh=0;
+	else
+		rh=1+root->right->ht;
+
+	if(lh>rh)
+		return(lh);
+	else
+		return(rh);
+}
+
+avl* avl::rotateright(avl *x)
+{
+	avl *y;
+	y=x->left;
+	x->left=y->right;
+	y->right=x;
+	x->ht=height(x);
+	y->ht=height(y);
+	return(y);
+}
+
+avl* avl::rotateleft(avl *x)
+{
+	avl *y;
+	y=x->right;
+	x->right=y->left;
+	y->left=x;
+	x->ht=height(x);
+	y->ht=height(y);
+	return(y);
+}
+
+int avl::BF(avl *root)
+{
+	int lh,rh;
+	if(root==NULL)
+		return 0;
+
+	if(root->left==NULL)
+		lh=0;
+	else
+		lh=1+root->left->ht;
+
+	if(root->right==NULL)
+			rh=0;
+		else
+		rh=1+root->right->ht;
+	int z=lh-rh;
+	return(z);
+}
+avl* avl::Delete(avl* T,char* w)
+{
+	avl *p;
+	if(T==NULL)
+	{
+		cout<<"\n Palabra no encontrada";
+		return T;
+	}
+	if(strcmp(w,T->spanish)>0)
+	{
+		T->right=Delete(T->right,w);
+		if(BF(T)==2)
+		{
+			if(BF(T->left)>=0)
+				T=LL(T);
+			else
+				T=LR(T);
+		}
+
+	}
+	else
+		if(strcmp(w,T->spanish)<0)
+		{
+			T->left=Delete(T->left,w);
+			if(BF(T)==-2)
+			{
+				if(BF(T->right)<=0)
+					T=RR(T);
+				else
+					T=RL(T);
+			}
+		}
+		else
+		{
+			if(T->right!=NULL)
+			{
+				p=T->right;
+				while(p->left!=NULL)
+					p=p->left;
+				strcpy(T->spanish,p->spanish);
+				strcpy(T->english,p->english);
+				strcpy(T->french,p->french);
+				strcpy(T->german,p->german);
+				strcpy(T->italian,p->italian);
+				T->right=Delete(T->right,p->spanish);
+						if(BF(T)==2)
+						{
+							if(BF(T->left)>=0)
+								T=LL(T);
+							else
+								T=LR(T);
+						}
+			}
+			else
+				return(T->left);
+		}
+	T->ht=height(T);
+	return(T);
+}
+avl* avl::RR(avl*T)
+{
+	T=rotateleft(T);
+	return(T);
+}
+avl* avl::LL(avl*T)
+{
+	T=rotateright(T);
+	return(T);
+}
+avl* avl::LR(avl*T)
+{
+	T->left=rotateleft(T->left);
+	T=rotateright(T);
+	return(T);
+}
+avl* avl::RL(avl*T)
+{
+	T->right=rotateright(T->right);
+	T=rotateleft(T);
+	return(T);
+}
+avl* avl::mirror(avl* temp)
+{
+	avl*p;
+	if(temp==NULL)
+		return NULL;
+	p=new avl;
+	strcpy(p->spanish,temp->spanish);
+	strcpy(p->english,temp->english);
+	strcpy(p->french,temp->french);
+	strcpy(p->german,temp->german);
+	strcpy(p->italian,temp->italian);
+	p->left=mirror(temp->right);
+	p->right=mirror(temp->left);
+	return p;
+}
+avl *avl::update(avl *root)
+{
+	avl *temp;
+	char w[20],m[50];
+	int idioma;
+	bool encuentra=false;
+	temp=root;
+	gotoxy(50,14);
+	cout<<"Ingrese la palabra a buscar : ";
+	cin>>w;
+	gotoxy(50,16);
+	std::cout << "Ingrese el idioma al que desea traducir: "<<endl;
+	gotoxy(50,17);
+	std::cout <<"[1] Espa�ol [2] Ingl�s [3] Franc�s [4] Alem�n [5] Italiano [0] Salir";
+	gotoxy(50,18);
+	cin>>idioma;
+	//cout<<"el idioma es: "<<idioma<<endl;
+	//cout<<"\n Enter the englishing(updated englishing): ";
+	//cin>>m;
+	while(temp!=NULL)
+	{ //cout<<"entro al ciclo "<<temp->spanish<<endl;
+		if((strcmp(w,temp->spanish)==0)) // or (strcmp(w,temp->english)==0) or (strcmp(w,temp->french)==0)  or (strcmp(w,temp->german)==0) or (strcmp(w,temp->italian)==0) )
+		{   gotoxy(50,19);
+			cout<<"Se escribe ->";
+			encuentra=true;
+			if(idioma==1) cout<<temp->spanish<<endl;
+			if(idioma==2) cout<<temp->english<<endl;
+			if(idioma==3) cout<<temp->french<<endl;
+			if(idioma==4) cout<<temp->german<<endl;
+			if(idioma==5) cout<<temp->italian<<endl;
+			
+			gotoxy(50,21);
+			cout<<"Y se pronuncia..."<<endl;
+			play(idioma-1, temp->index, w);
+			system("pause");
+			//strcpy(temp->spanish,w);
+			//strcpy(temp->english,m);
+			//////cout<<temp->english<<"-"<<temp->french<<"-"<<temp->german<<"-"<<temp->italian<<endl;
+			break;
+		}
+		if(strcmp(w,temp->spanish)<0)
+		{
+			temp=temp->left;
+		}
+		else
+		{
+			temp=temp->right;
+		}
+	}
+	if(!encuentra){
+			
+	}
+	return root;
+	//cout<<root;
+}
+
+void carga(){
+	//Carga de palabras en automatico
+	int ch;
+	char z;
+	//avl d,*root,*root1;
+	//root=NULL;
+	//std::vector<Palabra> palabras;
+    std::ifstream archivo("palabras.txt");
+    std::string palabra;
+    std::string palabra_traducida;
+	bool palabra_encontrada = false;
+    int indice_idioma;
+    int idioma_origen;
+    std::string index;
+	std::string paword1;
+	std::string paword2;
+	std::string paword3;
+	std::string paword4;
+	std::string paword5;
+	
+	string s;  
+	
+    // copying the contents of the
+    // string to char array
+   
+	//root=d.create(root);
+	//Apertura de archivo y lectura de datos
+    if (archivo.is_open()) {
+        std::string linea;
+        
+        while (std::getline(archivo, linea)) {
+        	//cout<<linea<<endl;
+            std::istringstream ss(linea);
+            //convierto todo a mayusculas para comparar
+            //
+            //Palabra palabra;
+            //palabra=to_upper(palabra);
+			std::getline(ss, index, ',');
+			std::getline(ss, paword1, ',');
+            std::getline(ss, paword2, ',');
+            std::getline(ss, paword3, ',');
+            std::getline(ss, paword4, ',');
+            std::getline(ss, paword5, ',');
+            //Spanish
+            const int length = paword1.length();
+			char* char_array = new char[length + 1];
+            strcpy(char_array, paword1.c_str());
+            
+            //english
+            const int length2 = paword2.length();
+			char* char_array2 = new char[length2 + 1];
+  			strcpy(char_array2, paword2.c_str());
+			
+			//french
+			const int length3 = paword3.length();
+			char* char_array3 = new char[length3 + 1];
+  			strcpy(char_array3, paword3.c_str());
+			
+			//german
+			const int length4 = paword4.length();
+			char* char_array4 = new char[length4 + 1];
+			strcpy(char_array4, paword4.c_str());
+			
+			//italian
+			const int length5 = paword5.length();
+			char* char_array5 = new char[length5 + 1];
+			strcpy(char_array5, paword5.c_str());
+			
+			const int length6 = index.length();
+			char* index_x = new char[length6 + 1];
+			strcpy(index_x, index.c_str());
+			
+			root=d.insert(root,index_x,char_array,char_array2, char_array3,char_array4,char_array5);
+			
+        }
+        archivo.close();
+        //d.display(root);
+    }
+	
+	
+	
+}
+int mai2n()
+{
+	
+	
+	char w[20],m[20],n[20],o[20],p[20];
+	int ch;
+	char z;
+	avl d,*root,*root1;
+	root=NULL;
+	root=d.create(root);
+	//carga();
+
+	//***********************************///
+	//Carga de palabras en automatico
+	///int ch;
+	///char z;
+	///avl d,*root,*root1;
+	///root=NULL;
+	//std::vector<Palabra> palabras;
+    std::ifstream archivo("palabras.txt");
+    std::string palabra;
+    std::string palabra_traducida;
+	bool palabra_encontrada = false;
+    int indice_idioma;
+    int idioma_origen;
+	std::string paword1;
+	std::string paword2;
+	std::string paword3;
+	std::string paword4;
+	std::string paword5;
+	
+	string s;  
+	
+    // copying the contents of the
+    // string to char array
+   
+	//root=d.create(root);
+	//Apertura de archivo y lectura de datos
+    if (archivo.is_open()) {
+        std::string linea;
+        
+        while (std::getline(archivo, linea)) {
+        	//cout<<linea<<endl;
+            std::istringstream ss(linea);
+            //convierto todo a mayusculas para comparar
+            //
+            //Palabra palabra;
+            //palabra=to_upper(palabra);
+			std::getline(ss, paword1, ',');
+            std::getline(ss, paword2, ',');
+            std::getline(ss, paword3, ',');
+            std::getline(ss, paword4, ',');
+            std::getline(ss, paword5, ',');
+            //Spanish
+            const int length = paword1.length();
+			char* char_array = new char[length + 1];
+            strcpy(char_array, paword1.c_str());
+            
+            //english
+            const int length2 = paword2.length();
+			char* char_array2 = new char[length2 + 1];
+  			strcpy(char_array2, paword2.c_str());
+			
+			//french
+			const int length3 = paword3.length();
+			char* char_array3 = new char[length3 + 1];
+  			strcpy(char_array3, paword3.c_str());
+			
+			//german
+			const int length4 = paword4.length();
+			char* char_array4 = new char[length4 + 1];
+			strcpy(char_array4, paword4.c_str());
+			
+			//italian
+			const int length5 = paword5.length();
+			char* char_array5 = new char[length5 + 1];
+			strcpy(char_array5, paword5.c_str());
+			
+			//root=d.insert(root,char_array,char_array2, char_array3,char_array4,char_array5);
+			
+        }
+        archivo.close();
+        //d.display(root);
+    }
+	//**********************************////
+	//root=d.insert(root,w,m);
+	//char w[20],m[50];
+	cout<<"*******************CREATION OF AVL*****************";
+	do
+	{
+		cout<<"\n 1.Create \n 2. Insert \n 3.Delete \n 4.Display\n 5.Update\n 6.Descending order\n 7.Exit";
+		cout<<"\n Enter your choice : ";
+		cin>>ch;
+		switch(ch)
+		{
+		//case 1:root=d.create(root);
+	    //           break;
+
+		case 2:cout<<"\n Enter the spanish :";
+		       cin>>w;
+		       cout<<"\n Enter the english :";
+		       cin>>m;
+		       cout<<"\n Enter the french :";
+		       cin>>n;
+		       cout<<"\n Enter the german :";
+		       cin>>o;
+		       cout<<"\n Enter the italian :";
+		       cin>>p;
+		       //root=d.insert(root,w,w,m,n,o,p);
+		       break;
+
+		case 3:cout<<"\n Enter spanish you want to delete : ";
+		       cin>>w;
+		       root=d.Delete(root,w);
+		       break;
+
+		case 4:cout<<"\n spanish in ascending order : ";
+		       d.display(root);
+		       break;
+
+		case 5:d.update(root);
+		       break;
+
+		case 6:cout<<"\n spanish in decending order : ";
+		       root1=d.mirror(root);
+		       d.display(root1);
+		       break;
+
+		case 7:cout<<"\n EXIT!";
+		}
+		cout<<"\n Do you want to continue?"<<endl;
+		cin>>z;
+	}while(z=='Y'||z=='y');
+	return 0;
+}
+//// FIN DE LA AGREGACION DE ESTRUCTURA DE ARBOL AVL
+
+
+//Se define estructura para cada idioma
+struct Palabra {
+    std::string espanol;
+    std::string italiano;
+    std::string frances;
+    std::string aleman;
+    std::string ingles;
+};
+
+
+
 int opc=0;
 
 void Say(const char *txt)
@@ -271,132 +941,6 @@ void fullscreen()
 }
 
  
-//Funcion para generar audios desde AWS Polly y luego de descargarlo en MP3 lo convierte en WAV
-string aws_audio(int index, string word, int wordindex, string palabra){
-	std::string comando; 
-	std::string fullPath = path;
-	std::string genfullPath = path;
-	
-	//cout<<"va a generar el archivo desde polly"<<endl;
-	//system("pause");
-	//En base a la sesleccion asigna la carpeta del idioma
-	if (index==0) fullPath +="spanish\\"; //Español
-	if (index==1) fullPath+="english\\"; //Ingles
-	if (index==2) fullPath+="german\\"; //Aleman
-	if (index==3) fullPath+="french\\"; //Frances
-	if (index==4) fullPath+="italian\\"; //Italiano
-	//Toma el path generico y se guarda por aparte
-	genfullPath=fullPath; //
-	stringstream ss;  
-	///////ss<<wordindex+1;  
-	ss<<wordindex+1;  
-	string s;  
-	ss>>s; 
-	//string str = to_string(wordindex;
-	//evalua el idioma para construir el string
-	comando="aws polly synthesize-speech --output-format mp3 --voice-id ";
-	if (index==0) comando +="Penelope"; //Español
-	if (index==1) comando +="Salli"; //Ingles
-	if (index==2) comando +="Vicki"; //Aleman
-	if (index==3) comando +="Lea"; //Frances
-	if (index==4) comando +="Bianca"; //Italiano
-	
-	fullPath+=s;
-	fullPath+=".mp3";
-	comando+=" --text '";
-	comando+=palabra;
-	comando+="' ";
-	comando+=fullPath;
-	comando+=" > nul"; //volver a poner para capturar el output
-	//cout<<" ya debio haber generado el archivo"<<endl;
-	//cout<<" path: "<<fullPath<<endl;
-	//cout<<" el comando es: "<<comando<<endl;
-	//cout<<comando<<endl;
-	//system("pause");
-	//std::string str;
-	const char * c = comando.c_str();
-	//manda a generar el audio de aws
-	system(c);
-	//cout<<"el path completo es: "<<s<<endl;
-	comando="ffmpeg -y -loglevel quiet -i ";
-	comando+=genfullPath;
-	comando+=s;
-	comando+=".mp3 ";
-	comando+=genfullPath;
-	comando+=s;
-	comando+=".wav ";
-	//out<<comando<<endl;
-	//system("pause");
-	const char * c1 = comando.c_str();
-	//Convierte mp3 a Wav
-	system(c1);
-	//devuelve  el valor en la rutina
-	//correlativo+=1;
-	genfullPath+=s;
-	genfullPath+=".wav";
-	return genfullPath;
-	//comando=palabra+".mp3";
-	//const char * c2 = comando.c_str();
-	
-	//system(c2);
-	//system("pause");
-	//word=403;	
-}
-
-//Funcion para reproducir sonidos
-void play(int index, string word, string palabra){
-	string iresp;
-	std::string fullPath = path;
-	
-	
-	if(word=="404") word+="1";
-	//cout<<" inicia rutina de reproduccion de audio"<<endl;
-	//cout<<word<<" la palabra "<<palabra<<endl;
-	//system("pause");
-	//En base a la sesleccion asigna la carpeta del idioma
-	if (index==0) fullPath +="spanish\\"; //Español
-	if (index==1) fullPath+="english\\"; //Ingles
-	if (index==2) fullPath+="german\\"; //Aleman
-	if (index==3) fullPath+="french\\"; //Frances
-	if (index==4) fullPath+="italian\\"; //Italiano
-	
-	fullPath += word;
-	fullPath += ".wav";
-	string archivo=fullPath;
-	
-	string nombreArchivo = archivo;
-	ifstream archivo1(nombreArchivo.c_str());
-	//file = fopen(archivo, "w");
-	if(archivo1){
-		//Todo OK y se reproduce el archivo
-	}
-	else {
-		
-		//cout<<" no aparece el archivo"<<" Correlativo es "<<correlativo<<" y la palabra es: "<<palabra<<endl;
-		//system("pause");
-        iresp=aws_audio(index,word,correlativo,palabra);
-		stringstream ss; 
-   		//string str = "7";
-	    int num;
-	   	ss << word;
-	   	ss >> num;
-	   	
-		//iresp=aws_audio(index,word,num,palabra);
-		//No lo encontró
-		fullPath=iresp;
-		//fullPath+=iresp;
-		//fullPath+=".wav";
-		//cout<<fullPath<<" path del archivo -- respuesta de funcion: "<<iresp<<endl;
-		//system("pause");
-		//system("cls");
-	}
-	const char *folder = fullPath.c_str();
-	int ires;
-	//cout<<"path ->"<<folder<<endl;
-	ires=PlaySound(folder, NULL, SND_FILENAME); //SND_FILENAME or SND_LOOP
-	//cout<<"respuesta: "<<ires<<endl;
-	
-}
 
 //sirvio para generar los audios en batch
 void Modificar()
@@ -505,7 +1049,7 @@ int buscarpalabra(){
 	std::string paword5;
 	string s;  
 	
-	
+	/* ESTA SECCION SE SUSTITUYE PARA USAR ARBOL AVL 10052023
 	//Apertura de archivo y lectura de datos
     if (archivo.is_open()) {
         std::string linea;
@@ -528,7 +1072,8 @@ int buscarpalabra(){
         std::cout << "No se pudo abrir el archivo del diccionario, por favor consulte con el administrador" << std::endl;
         system("pause");
         return 1;
-    }
+    } */
+    carga();
     do {
 	
     //Busqueda de palabras en el archivo
@@ -547,6 +1092,10 @@ int buscarpalabra(){
 		gotoxy(50,13);
 		cout<<""<<endl;
 		gotoxy(50,14);
+		d.update(root);
+		/*
+		system("pause");
+		cout<<"salio de funcion del arbol... "<<endl;
 		//int tec=getch();
 		//cout<<"             [1] Traducir palabra                                      "<<endl;
 	    std::cout << "  Ingrese la palabra a buscar: ";
@@ -812,7 +1361,7 @@ int buscarpalabra(){
 		   gotoxy(50,26);
 		   system("pause"); 
 		   
-			}
+			}*/
 	} while(indice_idioma > 0);
    //if(indice_idioma!=0) buscarpalabra();
    return 0;
@@ -863,6 +1412,8 @@ void intro(){
 			menu_sound=true;
 		}
 	//Sleep(5000);
+	root=NULL;
+	root=d.create(root);
 }
 
 //Funcion para imprimir el diccionario

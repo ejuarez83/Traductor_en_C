@@ -1,101 +1,100 @@
-Español, Italiano, Frances, Aleman , Ingles, , , 
-Hola, Ciao, Bonjour, Hallo, Hello, , , 
-Adios, Arrivederci, Aurevoir, Tschüss, Goodbye, , , 
-Gracias, Grazie, Merci, Danke, Thank-you, , , 
-favor, favore, S'il-vous-plaît, Bitte, Please, , , 
-Amor, Amore, Amour, Liebe, Love, , , 
-Amistad, Amicizia, Amitié, Freundschaft, Friendship, , , 
-Familia, Famiglia, Famille, Familie, Family, , , 
-Felicidad, Felicità, Bonheur, Glück, Happiness, , , 
-Tristeza, Tristezza, Tristesse, Traurigkeit, Sadness, , , 
-Alegria, Gioia, Joie, Freude, Joy, , , 
-Pasion, Passione, Passion, Leidenschaft, Passion, , , 
-Paz, Pace, Paix, Frieden, Peace, , , 
-Libertad, Libertà, Liberté, Freiheit, Freedom, , , 
-Sabiduria, Saggezza, Sagesse, Weisheit, Wisdom, , , 
-Esperanza, Speranza, Espoir, Hoffnung, Hope, , , 
-Confianza, Fiducia, Confiance, Vertrauen, Trust, , , 
-Respeto, Rispetto, Respect, Respekt, Respect, , , 
-Tolerancia, Tolleranza, Tolérance, Toleranz, Tolerance, , , 
-Paciencia, Pazienza, Patience, Geduld, Patience, , , 
-Valentia, Coraggio, Courage, Tapferkeit, Courage, , , 
-Humildad, Umiltà, Humilité, Bescheidenheit, Humility, , , 
-Honestidad, Onestà, Honnêteté, Ehrlichkeit, Honesty, , , 
-Sinceridad, Sincerità, Sincérité, Aufrichtigkeit, Sincerity, , , 
-Generosidad, Generosità, Générosité, Großzügigkeit, Generosity, , , 
-Solidaridad, Solidarietà, Solidarité, Solidarität, Solidarity, , , 
-Caridad, Carità, Charité, Wohltätigkeit, Charity, , , 
-Compasion, Compassione, Compassion, Mitgefühl, Compassion, , , 
-Empatia, Empatia, Empathie, Empathie, Empathy, , , 
-Sueño, Sonno, Rêve, Traum, Sleep, , , 
-Descanso, Riposo, Repos, Erholung, Rest, , , 
-Energia, Energia, Énergie, Energie, Energy, , , 
-Salud, Salute, Santé, Gesundheit, Health, , , 
-Bienestar, Benessere, Bien-être, Wohlbefinden, Well-being, , , 
-Nutricion, Nutrizione, Nutrition, Ernährung, Nutrition, , , 
-Deporte, Sport, Sport, Sport, Sport, , , 
-Musica, Musica, Musique, Musik, Music, , , 
-Arte, Arte, Art, Kunst, Art, , , 
-Cultura, Cultura, Culture, Kultur, Culture, , , 
-Literatura, Letteratura, Littérature, Literatur, Literature, , , 
-Ciencia, Scienza, Science, Wissenschaft, Science, , , 
-Tecnologia, Tecnologia, Technologie, Technologie, Technology, , , 
-Naturaleza, Natura, Nature, Natur, Nature, , , 
-ambiente, Ambiente, Environnement, Umwelt, Environment, , , 
-Animales, Animali, Animaux, Tiere, Animals, , , 
-Mar, Mare, Mer, Meer, Sea, , , 
-Montañas, Montagne, Montagnes, Berge, Mountains, , , 
-Rios, Fiumi, Rivières, Flüsse, Rivers, , , 
-Desierto, Deserto, Désert, Wüste, Desert, , , 
-Bosque, Bosco, Forêt, Wald, Forest, , , 
-Aire, Aria, Air, Luft, Air, , , 
-Agua, Acqua, Eau, Wasser, Water, , , 
-Fuego, Fuoco, Feu, Feuer, Fire, , , 
-Tierra, Terra, Terre, Erde, Earth, , , 
-Espacio, Spazio, Espace, Weltraum, Space, , , 
-Universo, Universo, Univers, Universum, Universe, , , 
-Estrellas, Stelle, Étoiles, Sterne, Stars, , , 
-Sol, Sole, Soleil, Sonne, Sun, , , 
-Luna, Luna, Lune, Mond, Moon, , , 
-Cielo, Cielo, Ciel, Himmel, Sky, , , 
-Nube, Nuvola, Nuage, Wolke, Cloud, , , 
-Rayo, Fulmine, Foudre, Blitz, Lightning, , , 
-Arcoiris, Arcobaleno, Arc-en-ciel, Regenbogen, Rainbow, , , 
-Flores, Fiori, Fleurs, Blumen, Flowers, , , 
-arboles, Alberi, Arbres, Bäume, Trees, , , 
-Plantas, Piante, Plantes, Pflanzen, Plants, , , 
-Frutas, Frutta, Fruits, Früchte, Fruits, , , 
-Verduras, Verdure, Légumes, Gemüse, Vegetables, , , 
-Carne, Carne, Viande, Fleisch, Meat, , , 
-Pescado, Pesce, Poisson, Fisch, Fish, , , 
-Arroz, Riso, Riz, Reis, Rice, , , 
-Pasta, Pasta, Pâtes, Nudeln, Pasta, , , 
-Pizza, Pizza, Pizza, Pizza, Pizza, , , 
-Hamburguesa, Hamburger, Hamburger, Hamburger, Hamburger, , , 
-Ensalada, Insalata, Salade, Salat, Salad, , , 
-Sopa, Zuppa, Soupe, Suppe, Soup, , , 
-Bebida, Bevanda, Boisson, Getränk, Drink, , , 
-Vino, Vino, Vin, Wein, Wine, , , 
-Cerveza, Birra, Bière, Bier, Beer, , , 
-Cafe, Caffè, Café, Kaffee, Coffee, , , 
-Te, Tè, Thé, Tee, Tea, , , 
-Chocolate, Cioccolato, Chocolat, Schokolade, Chocolate, , , 
-Helado, Gelato, Glace, Eis, Ice cream, , , 
-Dulces, Dolci, Bonbons, Süßigkeiten, Sweets, , , 
-Postre, Dessert,  Dessert, Nachtisch, Dessert, , , 
-Comida, Cibo, Nourriture, Essen, Food, , , 
-Cena, Cena, Dîner, Abendessen, Dinner, , , 
-Desayuno, Colazione, Petit déjeuner, Frühstück, Breakfast, , , 
-Almuerzo, Pranzo, Déjeuner,  Mittagessen, Lunch, , , 
-Merienda, Merenda, Goûter, Snack, Snack, , , 
-Trabajo,  Lavoro, Travail, Arbeit, Work, , , 
-Estudio,  Studio, Études, Studium, Study, , , 
-Aprendizaje, Apprendimento, Apprentissage, Lernen, Learning, , , 
-Enseñanza,  Insegnamento, Enseignement, Unterricht, Teaching, , , 
-Creatividad, Creatività, Créativité, Kreativität, Creativity, , , 
-Innovación, Innovazione, Innovation, Innovation, Innovation, , , 
-exito, Successo, Succès, Erfolg, Success, , , 
-Fracaso, Fallimento, Échec, Misserfolg, Failure, , , 
-Cambio, Cambiamento, Changement, Veränderung, Change, , , 
-Evolucion, Evoluzione, Évolution, Evolution, Evolution, , , 
- Vida, Vita, Vie, Leben, Life, , , 
+1,Hola,Hello,Bonjour,Hallo,Ciao
+2,Adios,Goodbye,Aurevoir,Tschüss,Arrivederci
+3,Gracias,Thank-you,Merci,Danke,Grazie
+4,favor,Please,S'il-vous-plaît,Bitte,favore
+5,Amor,Love,Amour,Liebe,Amore
+6,Amistad,Friendship,Amitié,Freundschaft,Amicizia
+7,Familia,Family,Famille,Familie,Famiglia
+8,Felicidad,Happiness,Bonheur,Glück,Felicità
+9,Tristeza,Sadness,Tristesse,Traurigkeit,Tristezza
+10,Alegria,Joy,Joie,Freude,Gioia
+11,Pasion,Passion,Passion,Leidenschaft,Passione
+12,Paz,Peace,Paix,Frieden,Pace
+13,Libertad,Freedom,Liberté,Freiheit,Libertà
+14,Sabiduria,Wisdom,Sagesse,Weisheit,Saggezza
+15,Esperanza,Hope,Espoir,Hoffnung,Speranza
+16,Confianza,Trust,Confiance,Vertrauen,Fiducia
+17,Respeto,Respect,Respect,Respekt,Rispetto
+18,Tolerancia,Tolerance,Tolérance,Toleranz,Tolleranza
+19,Paciencia,Patience,Patience,Geduld,Pazienza
+20,Valentia,Courage,Courage,Tapferkeit,Coraggio
+21,Humildad,Humility,Humilité,Bescheidenheit,Umiltà
+22,Honestidad,Honesty,Honnêteté,Ehrlichkeit,Onestà
+23,Sinceridad,Sincerity,Sincérité,Aufrichtigkeit,Sincerità
+24,Generosidad,Generosity,Générosité,Großzügigkeit,Generosità
+25,Solidaridad,Solidarity,Solidarité,Solidarität,Solidarietà
+26,Caridad,Charity,Charité,Wohltätigkeit,Carità
+27,Compasion,Compassion,Compassion,Mitgefühl,Compassione
+28,Empatia,Empathy,Empathie,Empathie,Empatia
+29,Sueño,Sleep,Rêve,Traum,Sonno
+30,Descanso,Rest,Repos,Erholung,Riposo
+31,Energia,Energy,Énergie,Energie,Energia
+32,Salud,Health,Santé,Gesundheit,Salute
+33,Bienestar,Well-being,Bien-être,Wohlbefinden,Benessere
+34,Nutricion,Nutrition,Nutrition,Ernährung,Nutrizione
+35,Deporte,Sport,Sport,Sport,Sport
+36,Musica,Music,Musique,Musik,Musica
+37,Arte,Art,Art,Kunst,Arte
+38,Cultura,Culture,Culture,Kultur,Cultura
+39,Literatura,Literature,Littérature,Literatur,Letteratura
+40,Ciencia,Science,Science,Wissenschaft,Scienza
+41,Tecnologia,Technology,Technologie,Technologie,Tecnologia
+42,Naturaleza,Nature,Nature,Natur,Natura
+43,ambiente,Environment,Environnement,Umwelt,Ambiente
+44,Animales,Animals,Animaux,Tiere,Animali
+45,Mar,Sea,Mer,Meer,Mare
+46,Montañas,Mountains,Montagnes,Berge,Montagne
+47,Rios,Rivers,Rivières,Flüsse,Fiumi
+48,Desierto,Desert,Désert,Wüste,Deserto
+49,Bosque,Forest,Forêt,Wald,Bosco
+50,Aire,Air,Air,Luft,Aria
+51,Agua,Water,Eau,Wasser,Acqua
+52,Fuego,Fire,Feu,Feuer,Fuoco
+53,Tierra,Earth,Terre,Erde,Terra
+54,Espacio,Space,Espace,Weltraum,Spazio
+55,Universo,Universe,Univers,Universum,Universo
+56,Estrellas,Stars,Étoiles,Sterne,Stelle
+57,Sol,Sun,Soleil,Sonne,Sole
+58,Luna,Moon,Lune,Mond,Luna
+59,Cielo,Sky,Ciel,Himmel,Cielo
+60,Nube,Cloud,Nuage,Wolke,Nuvola
+61,Rayo,Lightning,Foudre,Blitz,Fulmine
+62,Arcoiris,Rainbow,Arc-en-ciel,Regenbogen,Arcobaleno
+63,Flores,Flowers,Fleurs,Blumen,Fiori
+64,arboles,Trees,Arbres,Bäume,Alberi
+65,Plantas,Plants,Plantes,Pflanzen,Piante
+66,Frutas,Fruits,Fruits,Früchte,Frutta
+67,Verduras,Vegetables,Légumes,Gemüse,Verdure
+68,Carne,Meat,Viande,Fleisch,Carne
+69,Pescado,Fish,Poisson,Fisch,Pesce
+70,Arroz,Rice,Riz,Reis,Riso
+71,Pasta,Pasta,Pâtes,Nudeln,Pasta
+72,Pizza,Pizza,Pizza,Pizza,Pizza
+73,Hamburguesa,Hamburger,Hamburger,Hamburger,Hamburger
+74,Ensalada,Salad,Salade,Salat,Insalata
+75,Sopa,Soup,Soupe,Suppe,Zuppa
+76,Bebida,Drink,Boisson,Getränk,Bevanda
+77,Vino,Wine,Vin,Wein,Vino
+78,Cerveza,Beer,Bière,Bier,Birra
+79,Cafe,Coffee,Café,Kaffee,Caffè
+80,Te,Tea,Thé,Tee,Tè
+81,Chocolate,Chocolate,Chocolat,Schokolade,Cioccolato
+82,Helado,Ice cream,Glace,Eis,Gelato
+83,Dulces,Sweets,Bonbons,Süßigkeiten,Dolci
+84,Postre,Dessert, Dessert,Nachtisch,Dessert
+85,Comida,Food,Nourriture,Essen,Cibo
+86,Cena,Dinner,Dîner,Abendessen,Cena
+87,Desayuno,Breakfast,Petit déjeuner,Frühstück,Colazione
+88,Almuerzo,Lunch,Déjeuner, Mittagessen,Pranzo
+89,Merienda,Snack,Goûter,Snack,Merenda
+90,Trabajo,Work,Travail,Arbeit, Lavoro
+91,Estudio,Study,Études,Studium, Studio
+92,Aprendizaje,Learning,Apprentissage,Lernen,Apprendimento
+93,Enseñanza,Teaching,Enseignement,Unterricht, Insegnamento
+94,Creatividad,Creativity,Créativité,Kreativität,Creatività
+95,Innovación,Innovation,Innovation,Innovation,Innovazione
+96,exito,Success,Succès,Erfolg,Successo
+97,Fracaso,Failure,Échec,Misserfolg,Fallimento
+98,Cambio,Change,Changement,Veränderung,Cambiamento
+99,Evolucion,Evolution,Évolution,Evolution,Evoluzione
+100,Vida,Life,Vie,Leben,Vita
