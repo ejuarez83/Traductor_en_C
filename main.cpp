@@ -15,7 +15,7 @@
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "shlwapi.lib")
 #endif
-
+//#include "md5.h"
 //#pragma comment(lib, "Winmm.lib")
 #include <cstdlib> // contiene la funcion system("pause")
 #include <string> 
@@ -30,6 +30,7 @@
 /// Aqui se definen las variables globales
 std::string path ="c:\\lib\\voices\\"; //path de archivos de audio
 std::string diccionario_file ="..\\diccionario.txt"; //path de archivo de diccionario
+std::string user="Invitado";
 std::string user_profiles ="";//path de user profiles
 int correlativo=200; //variable de correlativo global
 std::string diccionario_a[5][1000]; //array de 5 columnas por 1000 filas
@@ -174,6 +175,378 @@ void play(int index, string word, string palabra){
 	
 }
 
+//Funcion para cifrado
+string cifrado(string palabra){
+	string k1;
+	string k2;
+	string k3;
+	//char str_inp1 = " ";
+    //char str_inp2 = " ";
+    int res;
+    string letra;
+	string g1="aeiouAEIOU";
+	string g2="bcdfghjklmnpqrstvwxyz";
+	string g3="BCDFGHJKLMNPQRSTVWXYZ";
+	
+	string palabra2="";
+	string nombreArchivo = "llave.txt";
+	ifstream archivo(nombreArchivo.c_str());
+	string linea;
+	
+	
+	// Obtener l√≠nea de archivo, y almacenar contenido en "linea"
+	getline(archivo, linea);
+    //cout<<"Dato original: "<<palabra<<endl;
+    k1=linea[0];
+    k2=linea[1];
+    k3=linea[2];
+    
+	for(int i=0; i<=palabra.length();i++){
+		//size_t find (const string& palabra[i], size_t pos = 0);
+		//cout<<"-------------Entra en ciclo ---------- iteracion: "<<i<<endl;
+		//valida si es vocal
+		size_t found = g1.find(palabra[i]);
+		if (found != string::npos){
+			res = 0;
+			//cout<<palabra[i]<<" Es Vocal..."<<endl;
+			letra = palabra[i];
+			//cout<<"La letra es: "<<letra<<endl;
+			res = letra.compare("a");
+			if(res==0) palabra2=palabra2+k1+"1";
+			res = letra.compare("A");
+			if(res==0) palabra2=palabra2+k1+"6";	
+			//if(letra.compare("e")) {
+			res = letra.compare("e");
+			if(res==0) palabra2=palabra2+k1+"2";
+			res = letra.compare("E");
+			if(res==0) palabra2=palabra2+k1+"7";
+			res = letra.compare("i");
+			if(res==0) palabra2=palabra2+k1+"3";
+			res = letra.compare("I");
+			if(res==0) palabra2=palabra2+k1+"8";
+			res = letra.compare("o");
+			if(res==0) palabra2=palabra2+k1+"4";
+			res = letra.compare("O");
+			if(res==0) palabra2=palabra2+k1+"9";
+			res = letra.compare("u");
+			if(res==0) palabra2=palabra2+k1+"5";
+			res = letra.compare("U");
+			if(res==0) palabra2=palabra2+k1+"10";
+			//cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
+		}
+		
+		found = g2.find(palabra[i]);
+		if (found != string::npos){
+			res = 0;
+			//cout<<palabra[i]<<" Es Vocal..."<<endl;
+			letra = palabra[i];
+			//cout<<"La letra es: "<<letra<<endl;
+			res = letra.compare("b");
+			if(res==0) palabra2=palabra2+k2+"1";
+			res = letra.compare("c");
+			if(res==0) palabra2=palabra2+k2+"2";	
+			res = letra.compare("d");
+			if(res==0) palabra2=palabra2+k2+"3";
+			res = letra.compare("f");
+			if(res==0) palabra2=palabra2+k2+"4";
+			res = letra.compare("g");
+			if(res==0) palabra2=palabra2+k2+"5";
+			res = letra.compare("h");
+			if(res==0) palabra2=palabra2+k2+"6";
+			res = letra.compare("j");
+			if(res==0) palabra2=palabra2+k2+"7";
+			res = letra.compare("k");
+			if(res==0) palabra2=palabra2+k2+"8";
+			res = letra.compare("l");
+			if(res==0) palabra2=palabra2+k2+"9";
+			res = letra.compare("m");
+			if(res==0) palabra2=palabra2+k2+"10";
+			res = letra.compare("n");
+			if(res==0) palabra2=palabra2+k2+"11";
+			res = letra.compare("Ò");
+			if(res==0) palabra2=palabra2+k2+"12";
+			res = letra.compare("p");
+			if(res==0) palabra2=palabra2+k2+"13";
+			res = letra.compare("q");
+			if(res==0) palabra2=palabra2+k2+"14";
+			res = letra.compare("r");
+			if(res==0) palabra2=palabra2+k2+"15";
+			res = letra.compare("s");
+			if(res==0) palabra2=palabra2+k2+"16";
+			res = letra.compare("t");
+			if(res==0) palabra2=palabra2+k2+"17";
+			res = letra.compare("v");
+			if(res==0) palabra2=palabra2+k2+"18";
+			res = letra.compare("w");
+			if(res==0) palabra2=palabra2+k2+"19";
+			res = letra.compare("x");
+			if(res==0) palabra2=palabra2+k2+"20";
+			res = letra.compare("y");
+			if(res==0) palabra2=palabra2+k2+"21";
+			res = letra.compare("z");
+			if(res==0) palabra2=palabra2+k2+"22";
+			
+			//cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
+		}
+		
+		
+		found = g3.find(palabra[i]);
+		if (found != string::npos){
+			res = 0;
+			//cout<<palabra[i]<<" Es Vocal..."<<endl;
+			letra = palabra[i];
+			//cout<<"La letra es: "<<letra<<endl;
+			res = letra.compare("B");
+			if(res==0) palabra2=palabra2+k3+"1";
+			res = letra.compare("C");
+			if(res==0) palabra2=palabra2+k3+"2";	
+			res = letra.compare("D");
+			if(res==0) palabra2=palabra2+k3+"3";
+			res = letra.compare("F");
+			if(res==0) palabra2=palabra2+k3+"4";
+			res = letra.compare("G");
+			if(res==0) palabra2=palabra2+k3+"5";
+			res = letra.compare("H");
+			if(res==0) palabra2=palabra2+k3+"6";
+			res = letra.compare("J");
+			if(res==0) palabra2=palabra2+k3+"7";
+			res = letra.compare("K");
+			if(res==0) palabra2=palabra2+k3+"8";
+			res = letra.compare("L");
+			if(res==0) palabra2=palabra2+k3+"9";
+			res = letra.compare("M");
+			if(res==0) palabra2=palabra2+k3+"10";
+			res = letra.compare("N");
+			if(res==0) palabra2=palabra2+k3+"11";
+			res = letra.compare("—");
+			if(res==0) palabra2=palabra2+k3+"12";
+			res = letra.compare("P");
+			if(res==0) palabra2=palabra2+k3+"13";
+			res = letra.compare("Q");
+			if(res==0) palabra2=palabra2+k3+"14";
+			res = letra.compare("R");
+			if(res==0) palabra2=palabra2+k3+"15";
+			res = letra.compare("S");
+			if(res==0) palabra2=palabra2+k3+"16";
+			res = letra.compare("T");
+			if(res==0) palabra2=palabra2+k3+"17";
+			res = letra.compare("V");
+			if(res==0) palabra2=palabra2+k3+"18";
+			res = letra.compare("W");
+			if(res==0) palabra2=palabra2+k3+"19";
+			res = letra.compare("X");
+			if(res==0) palabra2=palabra2+k3+"20";
+			res = letra.compare("Y");
+			if(res==0) palabra2=palabra2+k3+"21";
+			res = letra.compare("Z");
+			if(res==0) palabra2=palabra2+k3+"22";
+			
+			//cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
+		}
+		/*
+		//valida si es consonante minuscula
+		size_t1 found = g2.find(palabra[i]);
+		if (found != string::npos){
+			
+		}
+		
+		//valida si es consonante mayudscula
+		size_t2 found = g3.find(palabra[i]);
+		if (found != string::npos){
+			
+		}
+		*/
+	}
+	//cout<<"Dato cifrado: "<<palabra2<<endl; 	
+	return(palabra2);	
+}
+
+//Funcion para cifrado
+string descifrado(string palabra){
+	string k1;
+	string k2;
+	string k3;
+	//char str_inp1 = " ";
+    //char str_inp2 = " ";
+    int res;
+    string letra;
+	string g1="aeiouAEIOU";
+	string g2="bcdfghjklmnpqrstvwxyz";
+	string g3="BCDFGHJKLMNPQRSTVWXYZ";
+	
+	string palabra2="";
+	string nombreArchivo = "llave.txt";
+	ifstream archivo(nombreArchivo.c_str());
+	string linea;
+	
+	
+	// Obtener l√≠nea de archivo, y almacenar contenido en "linea"
+	getline(archivo, linea);
+    //cout<<"Dato original: "<<palabra<<endl;
+    k1=linea[0];
+    k2=linea[1];
+    k3=linea[2];
+    
+	for(int i=0; i<=palabra.length();i++){
+		//size_t find (const string& palabra[i], size_t pos = 0);
+		//cout<<"-------------Entra en ciclo ---------- iteracion: "<<i<<endl;
+		//valida si es vocal
+		size_t found = g1.find(palabra[i]);
+		if (found != string::npos){
+			res = 0;
+			//cout<<palabra[i]<<" Es Vocal..."<<endl;
+			letra = palabra[i];
+			//cout<<"La letra es: "<<letra<<endl;
+			res = letra.compare("a");
+			if(res==0) palabra2=palabra2+k1+"1";
+			res = letra.compare("A");
+			if(res==0) palabra2=palabra2+k1+"1";	
+			//if(letra.compare("e")) {
+			res = letra.compare("e");
+			if(res==0) palabra2=palabra2+k1+"2";
+			res = letra.compare("E");
+			if(res==0) palabra2=palabra2+k1+"2";
+			res = letra.compare("i");
+			if(res==0) palabra2=palabra2+k1+"3";
+			res = letra.compare("I");
+			if(res==0) palabra2=palabra2+k1+"3";
+			res = letra.compare("o");
+			if(res==0) palabra2=palabra2+k1+"4";
+			res = letra.compare("O");
+			if(res==0) palabra2=palabra2+k1+"4";
+			res = letra.compare("u");
+			if(res==0) palabra2=palabra2+k1+"5";
+			res = letra.compare("U");
+			if(res==0) palabra2=palabra2+k1+"5";
+			//cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
+		}
+		
+		found = g2.find(palabra[i]);
+		if (found != string::npos){
+			res = 0;
+			//cout<<palabra[i]<<" Es Vocal..."<<endl;
+			letra = palabra[i];
+			//cout<<"La letra es: "<<letra<<endl;
+			res = letra.compare("b");
+			if(res==0) palabra2=palabra2+k2+"1";
+			res = letra.compare("c");
+			if(res==0) palabra2=palabra2+k2+"2";	
+			res = letra.compare("d");
+			if(res==0) palabra2=palabra2+k2+"3";
+			res = letra.compare("f");
+			if(res==0) palabra2=palabra2+k2+"4";
+			res = letra.compare("g");
+			if(res==0) palabra2=palabra2+k2+"5";
+			res = letra.compare("h");
+			if(res==0) palabra2=palabra2+k2+"6";
+			res = letra.compare("j");
+			if(res==0) palabra2=palabra2+k2+"7";
+			res = letra.compare("k");
+			if(res==0) palabra2=palabra2+k2+"8";
+			res = letra.compare("l");
+			if(res==0) palabra2=palabra2+k2+"9";
+			res = letra.compare("m");
+			if(res==0) palabra2=palabra2+k2+"10";
+			res = letra.compare("n");
+			if(res==0) palabra2=palabra2+k2+"11";
+			res = letra.compare("Ò");
+			if(res==0) palabra2=palabra2+k2+"12";
+			res = letra.compare("p");
+			if(res==0) palabra2=palabra2+k2+"13";
+			res = letra.compare("q");
+			if(res==0) palabra2=palabra2+k2+"14";
+			res = letra.compare("r");
+			if(res==0) palabra2=palabra2+k2+"15";
+			res = letra.compare("s");
+			if(res==0) palabra2=palabra2+k2+"16";
+			res = letra.compare("t");
+			if(res==0) palabra2=palabra2+k2+"17";
+			res = letra.compare("v");
+			if(res==0) palabra2=palabra2+k2+"18";
+			res = letra.compare("w");
+			if(res==0) palabra2=palabra2+k2+"19";
+			res = letra.compare("x");
+			if(res==0) palabra2=palabra2+k2+"20";
+			res = letra.compare("y");
+			if(res==0) palabra2=palabra2+k2+"21";
+			res = letra.compare("z");
+			if(res==0) palabra2=palabra2+k2+"22";
+			
+			//cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
+		}
+		
+		
+		found = g3.find(palabra[i]);
+		if (found != string::npos){
+			res = 0;
+			//cout<<palabra[i]<<" Es Vocal..."<<endl;
+			letra = palabra[i];
+			//cout<<"La letra es: "<<letra<<endl;
+			res = letra.compare("B");
+			if(res==0) palabra2=palabra2+k3+"1";
+			res = letra.compare("C");
+			if(res==0) palabra2=palabra2+k3+"2";	
+			res = letra.compare("D");
+			if(res==0) palabra2=palabra2+k3+"3";
+			res = letra.compare("F");
+			if(res==0) palabra2=palabra2+k3+"4";
+			res = letra.compare("G");
+			if(res==0) palabra2=palabra2+k3+"5";
+			res = letra.compare("H");
+			if(res==0) palabra2=palabra2+k3+"6";
+			res = letra.compare("J");
+			if(res==0) palabra2=palabra2+k3+"7";
+			res = letra.compare("K");
+			if(res==0) palabra2=palabra2+k3+"8";
+			res = letra.compare("L");
+			if(res==0) palabra2=palabra2+k3+"9";
+			res = letra.compare("M");
+			if(res==0) palabra2=palabra2+k3+"10";
+			res = letra.compare("N");
+			if(res==0) palabra2=palabra2+k3+"11";
+			res = letra.compare("—");
+			if(res==0) palabra2=palabra2+k3+"12";
+			res = letra.compare("P");
+			if(res==0) palabra2=palabra2+k3+"13";
+			res = letra.compare("Q");
+			if(res==0) palabra2=palabra2+k3+"14";
+			res = letra.compare("R");
+			if(res==0) palabra2=palabra2+k3+"15";
+			res = letra.compare("S");
+			if(res==0) palabra2=palabra2+k3+"16";
+			res = letra.compare("T");
+			if(res==0) palabra2=palabra2+k3+"17";
+			res = letra.compare("V");
+			if(res==0) palabra2=palabra2+k3+"18";
+			res = letra.compare("W");
+			if(res==0) palabra2=palabra2+k3+"19";
+			res = letra.compare("X");
+			if(res==0) palabra2=palabra2+k3+"20";
+			res = letra.compare("Y");
+			if(res==0) palabra2=palabra2+k3+"21";
+			res = letra.compare("Z");
+			if(res==0) palabra2=palabra2+k3+"22";
+			
+			//cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
+		}
+		/*
+		//valida si es consonante minuscula
+		size_t1 found = g2.find(palabra[i]);
+		if (found != string::npos){
+			
+		}
+		
+		//valida si es consonante mayudscula
+		size_t2 found = g3.find(palabra[i]);
+		if (found != string::npos){
+			
+		}
+		*/
+	}
+	//cout<<"Dato cifrado: "<<palabra2<<endl; 	
+	return(palabra2);	
+}
+
 //// SE AGREGA LA ESTRUCTURA DE ARBOL AVL
 
 class avl
@@ -200,7 +573,7 @@ public:
 
 //Crea el arbol a nivel global para poderse usar
 avl d,*root,*root1;
-
+bool Salida=false;
 	
 avl* avl::create(avl *root)
 {	int n_o,i;
@@ -438,58 +811,187 @@ avl* avl::mirror(avl* temp)
 	p->right=mirror(temp->left);
 	return p;
 }
+
+void agrega_perfil(string texto){
+	//string texto;
+    std::string archivo_str=user;
+	archivo_str+=".pfl";
+	//std::ofstream myfile("profile.txt", ios::app);
+   	std::ofstream archivo(archivo_str.c_str(), ios::app); // Abre el archivo en modo de escritura y posiciona el puntero al final
+   	if (archivo.is_open()) {
+    	//cout << "Escriba el texto que desea agregar al archivo:" << endl;
+      	//getline(cin, texto); // Leer el texto ingresado por el usuario
+	      //archivo << texto << endl; // Escribir el texto en el archivo
+	      //archivo.close(); // Cerrar el archivo
+	      //cout<<"escribio al archivo la ultima palabra: "<<texto<<" cifrado "<<cifrado(texto)<<endl;
+	      //system("pause");
+	      boost::to_upper(texto);
+	      ifstream archivo_lectura(archivo_str.c_str()); // Abrir el archivo en modo de lectura
+	      if (archivo_lectura.is_open()) {
+	         string contenido((istreambuf_iterator<char>(archivo_lectura)), istreambuf_iterator<char>()); // Leer todo el contenido del archivo
+	         archivo_lectura.close(); // Cerrar el archivo
+	         ofstream archivo_escritura(archivo_str.c_str()); // Abrir el archivo en modo de escritura
+	         if (archivo_escritura.is_open()) {
+	            //archivo_escritura<< cifrado(texto) << endl << contenido; // Escribir el texto al principio del archivo y luego el contenido leÌdo anteriormente
+	            archivo_escritura<< texto << endl << contenido;
+				archivo_escritura.close(); // Cerrar el archivo
+	         } else {
+	            cout << "Error al abrir el archivo en modo de escritura." << endl;
+	         }
+	      } else {
+	         cout << "Error al abrir el archivo en modo de lectura." << endl;
+	      }
+	} else {
+	   cout << "Error al abrir el archivo en modo de escritura." << endl;
+	}
+}
 avl *avl::update(avl *root)
 {
 	avl *temp;
 	char w[20],m[50];
+	
 	int idioma;
 	bool encuentra=false;
 	temp=root;
-	gotoxy(50,14);
+	int indice_idioma;
+    int idioma_origen;
+    Salida=false;
+    string s; 
+    std::string palabra;
+    std::string palabra_original;
+    std::string palabra_traducida;
+	gotoxy(10,13);
+	cout<<"Ultimas palabras buscadas"<<endl;
+	//Carga las preferencias
+	int x=14;
+	string op;
+	std::string archivo_str=user;
+	archivo_str+=".pfl";
+	std::ifstream archivo(archivo_str.c_str(), ios::in);
+	if (archivo.is_open()) {
+        std::string linea;
+        
+        while (getline(archivo, linea)) {
+            //std::istringstream ss(linea);
+            //convierto todo a mayusculas para comparar
+            gotoxy(10,x);
+            cout<<linea<<endl;
+            x+=1;
+            //Palabra palabra;
+            //palabra=to_upper(palabra);
+        }
+        archivo.close();
+    } else {
+    }
+    
+    gotoxy(50,14);
 	cout<<"Ingrese la palabra a buscar : ";
-	cin>>w;
-	gotoxy(50,16);
-	std::cout << "Ingrese el idioma al que desea traducir: "<<endl;
-	gotoxy(50,17);
-	std::cout <<"[1] EspaÒol [2] InglÈs [3] FrancÈs [4] Alem·n [5] Italiano [0] Salir";
-	gotoxy(50,18);
-	cin>>idioma;
-	//cout<<"el idioma es: "<<idioma<<endl;
-	//cout<<"\n Enter the englishing(updated englishing): ";
-	//cin>>m;
-	while(temp!=NULL)
-	{ //cout<<"entro al ciclo "<<temp->spanish<<endl;
-		if((strcmp(w,temp->spanish)==0)) // or (strcmp(w,temp->english)==0) or (strcmp(w,temp->french)==0)  or (strcmp(w,temp->german)==0) or (strcmp(w,temp->italian)==0) )
-		{   gotoxy(50,19);
-			cout<<"Se escribe ->";
-			encuentra=true;
-			if(idioma==1) cout<<temp->spanish<<endl;
-			if(idioma==2) cout<<temp->english<<endl;
-			if(idioma==3) cout<<temp->french<<endl;
-			if(idioma==4) cout<<temp->german<<endl;
-			if(idioma==5) cout<<temp->italian<<endl;
+	cin>>palabra;
+	palabra_original=palabra;
+	boost::to_upper(palabra);
+	
+	//std::toupper(ch)
+	//w = boost::to_upper(w);
+	//for (int x=0; x<strlen(w); x++)
+    //    putchar(toupper(w[x]));
+    strcpy(w, palabra.c_str());
+    //w=toupper(w);//(char)toupper( w);
+    
+        
+	if(strcmp(w,"SALIR")!=0){
+	
+		gotoxy(50,16);
+		std::cout << "Ingrese el idioma al que desea traducir: "<<endl;
+		gotoxy(50,17);
+		std::cout <<"[1] EspaÒol [2] InglÈs [3] FrancÈs [4] Alem·n [5] Italiano [0] Salir";
+		gotoxy(50,18);
+		cin>>idioma;
+		
+		//cout<<"el idioma es: "<<idioma<<endl;
+		//cout<<"\n Enter the englishing(updated englishing): ";
+		//cin>>m;
+		while(temp!=NULL)
+		{ //cout<<"entro al ciclo "<<temp->spanish<<endl;
+			if((strcmp(w,temp->spanish)==0) or (strcmp(w,temp->english)==0) or (strcmp(w,temp->french)==0)  or (strcmp(w,temp->german)==0) or (strcmp(w,temp->italian)==0) )
+			{   gotoxy(50,19);
+				cout<<"Se escribe ->";
+				encuentra=true;
+				if(idioma==1) cout<<temp->spanish<<endl;
+				if(idioma==2) cout<<temp->english<<endl;
+				if(idioma==3) cout<<temp->french<<endl;
+				if(idioma==4) cout<<temp->german<<endl;
+				if(idioma==5) cout<<temp->italian<<endl;
+				agrega_perfil(palabra_original);
+				gotoxy(50,21);
+				cout<<"Y se pronuncia..."<<endl;
+				play(idioma-1, temp->index, w);
+				gotoxy(50,23);
+				system("pause");
+				//strcpy(temp->spanish,w);
+				//strcpy(temp->english,m);
+				//////cout<<temp->english<<"-"<<temp->french<<"-"<<temp->german<<"-"<<temp->italian<<endl;
+				break;
+			} 
+			if(strcmp(w,temp->spanish)<0)
+			{
+				temp=temp->left;
+			}
+			else
+			{
+				temp=temp->right;
+			}
+		}
+		if(!encuentra){
 			
-			gotoxy(50,21);
-			cout<<"Y se pronuncia..."<<endl;
-			play(idioma-1, temp->index, w);
-			system("pause");
-			//strcpy(temp->spanish,w);
-			//strcpy(temp->english,m);
-			//////cout<<temp->english<<"-"<<temp->french<<"-"<<temp->german<<"-"<<temp->italian<<endl;
-			break;
+				gotoxy(50,19);
+				cout<<"Su palabra no existe en el diccionario pero la encontraremos en linea..."<<endl;
+		   	 	gotoxy(50,20);
+		   	 	cout << "Ingrese el idioma original de la palabra [1] EspaÒol [2] InglÈs [3] Alem·n [4] FrancÈs [5] Italiano";
+		   	 	gotoxy(50,21);
+		   	 	cin>>idioma_origen;
+		   	 	string idioma_traducir;
+		   	 	string idioma_destino;
+		   	 	if(idioma_origen ==1) idioma_traducir="es";
+		   	 	if(idioma_origen ==2) idioma_traducir="en";
+		   	 	if(idioma_origen ==3) idioma_traducir="de";
+		   	 	if(idioma_origen ==4) idioma_traducir="fr";
+		   	 	if(idioma_origen ==5) idioma_traducir="it";
+		   	 	
+		   	 	if(idioma ==1) idioma_destino="es";
+		   	 	if(idioma ==2) idioma_destino="en";
+		   	 	if(idioma ==3) idioma_destino="de";
+		   	 	if(idioma ==4) idioma_destino="fr";
+		   	 	if(idioma ==5) idioma_destino="it";
+		   	 	std::string comando; 
+		   	 	agrega_perfil(palabra_original);
+		   	 	comando="python translate.py --text ";
+				comando+=w;
+				comando+=" --target-language ";
+				comando+=idioma_destino;
+				comando+=" --api-key '123456asdfasdfaf' --src_lan ";
+				comando+=idioma_traducir;
+				comando+=" >output.txt";
+				//cout<<"el comando es: "<<comando<<endl;
+				//system("pause");
+				
+		   	 	const char * c1 = comando.c_str();
+		   	 	gotoxy(50,23);
+		   	 	palabra_traducida=system(c1);
+		   	 	std::ifstream archivo("output.txt");
+		   	 	std::getline(archivo, palabra_traducida);
+		   	 	palabra=system(c1);
+		   	 	cout<<"Su palabra se escribe: "<<palabra_traducida<<endl;
+		   	 	play(idioma-1, "201", palabra_traducida);
+		   	 	stringstream ss;
+				ss<<correlativo;
+				ss>>s; 
+				gotoxy(50,24);
+				cout<<"y se pronuncia..."<<endl;
+				gotoxy(50,26);
+				system("pause");
+		   	 	
 		}
-		if(strcmp(w,temp->spanish)<0)
-		{
-			temp=temp->left;
-		}
-		else
-		{
-			temp=temp->right;
-		}
-	}
-	if(!encuentra){
-			
-	}
+	} else Salida=true;
 	return root;
 	//cout<<root;
 }
@@ -538,6 +1040,11 @@ void carga(){
             std::getline(ss, paword4, ',');
             std::getline(ss, paword5, ',');
             //Spanish
+            boost::to_upper(paword1);
+            boost::to_upper(paword2);
+            boost::to_upper(paword3);
+            boost::to_upper(paword4);
+            boost::to_upper(paword5);
             const int length = paword1.length();
 			char* char_array = new char[length + 1];
             strcpy(char_array, paword1.c_str());
@@ -571,11 +1078,13 @@ void carga(){
         }
         archivo.close();
         //d.display(root);
+        //system("pause");
     }
 	
 	
 	
 }
+/*
 int mai2n()
 {
 	
@@ -588,7 +1097,7 @@ int mai2n()
 	root=d.create(root);
 	//carga();
 
-	//***********************************///
+	
 	//Carga de palabras en automatico
 	///int ch;
 	///char z;
@@ -660,7 +1169,7 @@ int mai2n()
         archivo.close();
         //d.display(root);
     }
-	//**********************************////
+	
 	//root=d.insert(root,w,m);
 	//char w[20],m[50];
 	cout<<"*******************CREATION OF AVL*****************";
@@ -711,6 +1220,7 @@ int mai2n()
 	}while(z=='Y'||z=='y');
 	return 0;
 }
+*/
 //// FIN DE LA AGREGACION DE ESTRUCTURA DE ARBOL AVL
 
 
@@ -1073,7 +1583,7 @@ int buscarpalabra(){
         system("pause");
         return 1;
     } */
-    carga();
+    /////carga();
     do {
 	
     //Busqueda de palabras en el archivo
@@ -1088,7 +1598,7 @@ int buscarpalabra(){
 		gotoxy(50,11);
 		cout<<"##                      Menu Traducir                                #"<<endl;
 		gotoxy(50,12);
-		cout<<"#############################################Para Salir presione ESC #"<<endl;
+		cout<<"#############################################Para Salir escriba SALIR#"<<endl;
 		gotoxy(50,13);
 		cout<<""<<endl;
 		gotoxy(50,14);
@@ -1362,6 +1872,7 @@ int buscarpalabra(){
 		   system("pause"); 
 		   
 			}*/
+			if(Salida) indice_idioma=0;
 	} while(indice_idioma > 0);
    //if(indice_idioma!=0) buscarpalabra();
    return 0;
@@ -1539,113 +2050,6 @@ void agrega(){
 	
 }
 
-//Funcion para cifrado
-void cifrado(string palabra){
-	string k1;
-	string k2;
-	string k3;
-	//char str_inp1 = " ";
-    //char str_inp2 = " ";
-    int res;
-    string letra;
-	string g1="aeiouAEIOU";
-	string g2="bcdfghjklmnpqrstvwxyz";
-	string g3="BCDFGHJKLMNPQRSTVWXYZ";
-	
-	string palabra2="";
-	string nombreArchivo = "c:\\temp\\llave.txt";
-	ifstream archivo(nombreArchivo.c_str());
-	string linea;
-	
-	
-	// Obtener l√≠nea de archivo, y almacenar contenido en "linea"
-	getline(archivo, linea);
-    //cout<<"Dato original: "<<palabra<<endl;
-    k1=linea[0];
-    k2=linea[1];
-    k3=linea[2];
-    
-	for(int i=0; i<=palabra.length();i++){
-		//size_t find (const string& palabra[i], size_t pos = 0);
-		//cout<<"-------------Entra en ciclo ---------- iteracion: "<<i<<endl;
-		//valida si es vocal
-		size_t found = g1.find(palabra[i]);
-		if (found != string::npos){
-			res = 0;
-			//cout<<palabra[i]<<" Es Vocal..."<<endl;
-			letra = palabra[i];
-			//cout<<"La letra es: "<<letra<<endl;
-			res = letra.compare("a");
-			if(res==0) palabra2=palabra2+k1+"1";
-			res = letra.compare("A");
-			if(res==0) palabra2=palabra2+k1+"1";	
-			//if(letra.compare("e")) {
-			res = letra.compare("e");
-			if(res==0) palabra2=palabra2+k1+"2";
-			res = letra.compare("E");
-			if(res==0) palabra2=palabra2+k1+"2";
-			res = letra.compare("i");
-			if(res==0) palabra2=palabra2+k1+"3";
-			res = letra.compare("I");
-			if(res==0) palabra2=palabra2+k1+"3";
-			res = letra.compare("o");
-			if(res==0) palabra2=palabra2+k1+"4";
-			res = letra.compare("O");
-			if(res==0) palabra2=palabra2+k1+"4";
-			res = letra.compare("u");
-			if(res==0) palabra2=palabra2+k1+"5";
-			res = letra.compare("U");
-			if(res==0) palabra2=palabra2+k1+"5";
-			//cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
-		}
-		
-		found = g2.find(palabra[i]);
-		if (found != string::npos){
-			res = 0;
-			//cout<<palabra[i]<<" Es Vocal..."<<endl;
-			letra = palabra[i];
-			//cout<<"La letra es: "<<letra<<endl;
-			res = letra.compare("a");
-			if(res==0) palabra2=palabra2+k1+"1";
-			res = letra.compare("A");
-			if(res==0) palabra2=palabra2+k1+"1";	
-			//if(letra.compare("e")) {
-			res = letra.compare("e");
-			if(res==0) palabra2=palabra2+k1+"2";
-			res = letra.compare("E");
-			if(res==0) palabra2=palabra2+k1+"2";
-			res = letra.compare("i");
-			if(res==0) palabra2=palabra2+k1+"3";
-			res = letra.compare("I");
-			if(res==0) palabra2=palabra2+k1+"3";
-			res = letra.compare("o");
-			if(res==0) palabra2=palabra2+k1+"4";
-			res = letra.compare("O");
-			if(res==0) palabra2=palabra2+k1+"4";
-			res = letra.compare("u");
-			if(res==0) palabra2=palabra2+k1+"5";
-			res = letra.compare("U");
-			if(res==0) palabra2=palabra2+k1+"5";
-			cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
-		}
-		/*
-		//valida si es consonante minuscula
-		size_t1 found = g2.find(palabra[i]);
-		if (found != string::npos){
-			
-		}
-		
-		//valida si es consonante mayudscula
-		size_t2 found = g3.find(palabra[i]);
-		if (found != string::npos){
-			
-		}
-		*/
-	}
-	cout<<"Dato cifrado: "<<palabra2<<endl; 	
-		
-}
-
 
 //Despedida del sistema
 void salida(){
@@ -1697,6 +2101,13 @@ void menu(){
   std::string fullPath="c:\\lib\\2001.wav";
   const char *folder = fullPath.c_str();
   int ires;
+  char *m1 =strdup("entro al menu");
+  char *m2 = strdup("Error");
+  //MSGBOX(m1 ,m2 );
+  //carga archivo en arbol AVL
+  
+  
+  //carga el perfil del usuario
   
   //fullscreen();
   miMenu.Add_Items("1. Traducir  ",1);	
@@ -1704,26 +2115,32 @@ void menu(){
   miMenu.Add_Items("3. Salir ",3);	
   //miMenu.Add_Items("4. Salir    ",4);	
   
+  
   //miMenu.Set_Space(2);
 
 
 do{
 	TextColor(10);
 	system("cls");
+	gotoxy(10,70);
+  cout<<"usuario en sesion: "<<user<<endl;
 	Say(65,12,"TRADUCTOR");
 	Say(61,13,"PROGRAMACION III");
-		ires=PlaySound(folder, NULL, SND_FILENAME);
+		//ires=PlaySound(folder, NULL, SND_FILENAME);
 			menu_sound=true;
 		//}//
-		
+		Salir=false;
+		opc=0;
 	if(opc==0)
 		{
-		SetColorB(2,19);  
-		Rectangle(50,17,40,12,"#"); 
-		SetColorA(2,22);  
-		Say(58,15,"*** MENU PRINCIPAL ***");
-  		opc=miMenu.Draw(61,20);
-  		
+			SetColorB(2,19);  
+			Rectangle(50,17,40,12,"#"); 
+			SetColorA(2,22);  
+			Say(58,15,"*** MENU PRINCIPAL ***");
+			//system("pause");
+			Salir=false;
+	  		opc=miMenu.Draw(61,20);
+	  		
 	    }	
   	
 		//cout<<folder<<endl;
@@ -1757,8 +2174,9 @@ do{
   
 
 }while(Salir==false);
-  
-	
+//cout<<"va a salir...salir: "<<Salir<<endl;
+Salir=false;
+//system("pause");
 }
 
 //Manuel aqui iria tu aporte y se copiaria al resto de pantallas
@@ -1811,9 +2229,271 @@ void menu2 (){
 	salida();
 }
 
+void login(){
+	setlocale(LC_ALL, ""); 
+	int iopt;
+	bool continua=false;
+	std::string temp_user;
+	std::string temp_pass;
+	do{
+		temp_user="";
+		temp_pass="";
+		system("cls");
+		system("color 0a");
+		gotoxy(50,10);
+		cout<<"#####################################################################"<<endl;
+		gotoxy(50,11);
+		cout<<"                                login                                "<<endl;
+		gotoxy(50,12);
+		cout<<"#####################################################################"<<endl;
+		gotoxy(50,13);
+		cout<<""<<endl;
+		gotoxy(50,14);
+		cout<<"                       [1] Iniciar sesion"<<endl;
+		gotoxy(50,15);
+		cout<<"                       [2] Cambia Password"<<endl;
+		gotoxy(50,16);
+		cout<<"                       [3] Ingresar como invitado"<<endl;
+		gotoxy(50,17);
+		cout<<"                       [4] Salir"<<endl;
+		gotoxy(50,18);
+		cout<<"                           [   ] "<<endl;
+		
+		
+		gotoxy(79,18);
+		cin>>iopt;
+		
+		
+	
+	//system("exit");
+		//inicia sesion
+		if(iopt==1){
+			//se tendra en una variable de entorno el usuario logueado y los datos de loguin se encriptan en un archivo de configuracion
+			system("cls");
+			continua=false;
+			//encontrado=false;
+			gotoxy(50,10);
+			cout<<"#####################################################################"<<endl;
+			gotoxy(50,11);
+			cout<<"               usuario: "<<endl;
+			
+			gotoxy(50,15);
+			cout<<"#####################################################################"<<endl;
+			//captura user
+			gotoxy(75,11);
+			cin>>temp_user;
+			//captura pass
+			gotoxy(50,13);
+			cout<<"               ContraseÒa: ";
+			gotoxy(79,13);
+			//string pass ="";
+		    char ch;
+		    temp_pass="";
+		    //cout << "Enter pass\n";
+		    ch = _getch();
+		    while(ch != 13){//character 13 is enter
+		       temp_pass.push_back(ch);
+		       cout << '*';
+		       ch = _getch();
+		    }
+			//cin>>temp_pass;
+			user=temp_user;
+			//cout<<"usuario: "<<user<<" password: "<<temp_pass<<endl;
+			//system("pause");
+			//valida el pass
+			std::ifstream archivo("users.txt");
+			std::string usuario;
+		    std::string contrasena;
+			int icont=12;
+			bool encontrado=false;
+			//carga el diccionario
+		  	//Apertura de archivo y lectura de datos
+		    if (archivo.is_open()) {
+		        std::string linea;
+		        
+		        while (std::getline(archivo, linea)) {
+		            std::istringstream ss(linea);
+		            //convierto todo a mayusculas para comparar
+		            
+		            //Palabra palabra;
+		            //palabra=to_upper(palabra);
+					std::getline(ss, usuario, ',');
+		            std::getline(ss, contrasena, ',');
+		            
+		            if(usuario==user){
+		            	encontrado=true;
+		            	continua=false;
+		            	if(cifrado(temp_pass)==contrasena) {
+		            		//cout<<"encontro el usuario y pass"<<endl;
+		            		char *m1 =strdup("Encontro el pass");
+							char *m2 = strdup("Error");
+							//MSGBOX(m1 ,m2 );
+							continua=true;
+		            	}
+						if(!continua){
+		            		gotoxy(50,17);
+		            		cout<<"Usuario o contraseÒa incorrectos, intente de nuevo o cree un usuario";
+		            		gotoxy(50,18);
+		            		system("pause");
+						}
+					}
+		        }
+		        
+		        archivo.close();
+		        if(!encontrado){
+		        	gotoxy(50,17);
+		        	cout<<"Su usuario no existe, procederemos a crearlo y podra ingresar una proxima vez";
+		        	system("pause");
+		        	std::ofstream myfile("users.txt", ios::app);
+		        	myfile <<user<<","<<cifrado(temp_pass)<<"\n";
+  					myfile.close();
+				}
+		    } else {
+		    	
+		        std::cout << "No se pudo abrir el archivo del usuarios, \npor favor consulte con el administrador, \niniciara sesion como invitado" << std::endl;
+		        //system("pause");
+		        //return 1;
+		    }
+			if(continua) {
+				char *m1 =strdup("Continua");
+				char *m2 = strdup("Error");
+				//MSGBOX(m1 ,m2 );
+				menu();
+			}
+		} else {
+			//crea usuario
+			if(iopt==2){
+				
+				menu();
+			} else {
+			
+				//invitado
+				if(iopt==3){
+					user="Invitado";
+					menu();
+				} else {
+					char *m1 =strdup("Opcion no valida");
+					char *m2 = strdup("Error");
+					if(iopt!=4) MSGBOX(m1 ,m2 );
+				}
+			}
+		
+		}
+		
+	} while (iopt!=4);
+	salida();
+//	system("pause");
+}
+/*
+void intento(){
+	
+	string texto="g4U2g9U3g2U3g3U1g3";
+	string temp = "";
+	string caracter[]="";
+	string texto2;
+	string k1;
+	string k2;
+	string k3;
+	
+	string nombreArchivo = "llave.txt";
+	ifstream archivo(nombreArchivo.c_str());
+	string linea;
+	
+	
+	// Obtener l√≠nea de archivo, y almacenar contenido en "linea"
+	getline(archivo, linea);
+    //cout<<"Dato original: "<<palabra<<endl;
+    k1=linea[0];
+    k2=linea[1];
+    k3=linea[2];
+	//descifrado(texto);
+	
+	
+	for(int i=1; i<=texto.length();;i++){
+		//if((texto[i] ==char("g")) or (texto[i] == char("U")) or (texto[i] == char("m"))){
+		caracter= texto[i];
+		size_t found = k1.find(palabra[i]);
+		if (found != string::npos){
+		    res = 0;
+			//cout<<palabra[i]<<" Es Vocal..."<<endl;
+			letra = palabra[i];
+			//convierte y guarda
+			//es vocal
+			if(temp[0]=="U"){
+				if("U1") texto2+="a";
+				if("U2") texto2+="e";
+				if("U3") texto2+="i";
+				if("U4") texto2+="o";
+				if("U5") texto2+="u";
+				if("U6") texto2+="A";
+				if("U7") texto2+="E";
+				if("U8") texto2+="I";
+				if("U9") texto2+="O";
+				if("U10") texto2+="U";
+			}
+			//es consonante minuscula
+			if(temp[0]=="m"){
+				if("m1") texto2+="b";
+				if("m2") texto2+="c";
+				if("m3") texto2+="d";
+				if("m4") texto2+="f";
+				if("m5") texto2+="g";
+				if("m6") texto2+="h";
+				if("m7") texto2+="j";
+				if("m8") texto2+="k";
+				if("m9") texto2+="l";
+				if("m10") texto2+="m";
+				if("m11") texto2+="n";
+				if("m12") texto2+="Ò";
+				if("m13") texto2+="p";
+				if("m14") texto2+="q";
+				if("m15") texto2+="r";
+				if("m16") texto2+="s";
+				if("m17") texto2+="t";
+				if("m18") texto2+="v";
+				if("m19") texto2+="w";
+				if("m20") texto2+="x";
+				if("m21") texto2+="y";
+				if("m22") texto2+="z";
+			}
+			//es consonante mayuscula
+			if(temp[0]=="g"){
+				if("g1") texto2+="B";
+				if("g2") texto2+="C";
+				if("g3") texto2+="D";
+				if("g4") texto2+="F";
+				if("g5") texto2+="G";
+				if("g6") texto2+="H";
+				if("g7") texto2+="J";
+				if("g8") texto2+="K";
+				if("g9") texto2+="L";
+				if("g10") texto2+="M";
+				if("g11") texto2+="N";
+				if("g12") texto2+="—";
+				if("g13") texto2+="P";
+				if("g14") texto2+="Q";
+				if("g15") texto2+="R";
+				if("g16") texto2+="S";
+				if("g17") texto2+="T";
+				if("g18") texto2+="V";
+				if("g19") texto2+="W";
+				if("g20") texto2+="X";
+				if("g21") texto2+="Y";
+				if("g22") texto2+="Z";
+			}
+			//limpia la temp
+			temp=texto[i];
+		} else {
+			temp+=texto[i];
+		}
+	}
+	cout<<"la palabra original era: "<<texto<<" y la descifrada es: "<<texto2<<endl;
+}
+*/
 //Metodo principal para llamar las distintas funciones
 int main() {
-	
+	//intento();
+	//system("pause");
 	//limpia archivos 2??.wav para evitar problemas
 	system("del c:\\lib\\voices\\200.wav /s");
 	system("del c:\\lib\\voices\\201.wav /s");
@@ -1822,16 +2502,17 @@ int main() {
 	system("del c:\\lib\\voices\\204.wav /s");
 	system("del c:\\lib\\voices\\205.wav /s");
 	system("cls");
+	//carga();
 	fullscreen();
 	//defaults();
 	//buscarpalabra();
 	//system("pause");
 	//fullscreen();
 	intro();
+	carga();
 	//carga_diccionario();
-	menu();
-	salida();
-	system("exit");
+	login();
+	
 	//string palabra;
 	//cout<<"Por favor ingrese la palabra a cifrar"<<endl;
 	//cin>>palabra;
