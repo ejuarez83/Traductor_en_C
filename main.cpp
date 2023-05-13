@@ -362,19 +362,17 @@ string cifrado(string palabra){
 }
 
 //Funcion para cifrado
-string descifrado(string palabra){
-	string k1;
-	string k2;
-	string k3;
-	//char str_inp1 = " ";
-    //char str_inp2 = " ";
-    int res;
-    string letra;
-	string g1="aeiouAEIOU";
-	string g2="bcdfghjklmnpqrstvwxyz";
-	string g3="BCDFGHJKLMNPQRSTVWXYZ";
+
+string descifra(string cadena){
 	
-	string palabra2="";
+	//string cadena="g4U2g9U3g2U3g3U1g3";
+	string temp = "";
+	//string caracter[]="";
+	//string texto2;
+	//string k1;
+	//string k2;
+	//string k3;
+	
 	string nombreArchivo = "llave.txt";
 	ifstream archivo(nombreArchivo.c_str());
 	string linea;
@@ -383,168 +381,147 @@ string descifrado(string palabra){
 	// Obtener l√≠nea de archivo, y almacenar contenido en "linea"
 	getline(archivo, linea);
     //cout<<"Dato original: "<<palabra<<endl;
-    k1=linea[0];
-    k2=linea[1];
-    k3=linea[2];
-    
-	for(int i=0; i<=palabra.length();i++){
-		//size_t find (const string& palabra[i], size_t pos = 0);
-		//cout<<"-------------Entra en ciclo ---------- iteracion: "<<i<<endl;
-		//valida si es vocal
-		size_t found = g1.find(palabra[i]);
-		if (found != string::npos){
-			res = 0;
-			//cout<<palabra[i]<<" Es Vocal..."<<endl;
-			letra = palabra[i];
-			//cout<<"La letra es: "<<letra<<endl;
-			res = letra.compare("a");
-			if(res==0) palabra2=palabra2+k1+"1";
-			res = letra.compare("A");
-			if(res==0) palabra2=palabra2+k1+"1";	
-			//if(letra.compare("e")) {
-			res = letra.compare("e");
-			if(res==0) palabra2=palabra2+k1+"2";
-			res = letra.compare("E");
-			if(res==0) palabra2=palabra2+k1+"2";
-			res = letra.compare("i");
-			if(res==0) palabra2=palabra2+k1+"3";
-			res = letra.compare("I");
-			if(res==0) palabra2=palabra2+k1+"3";
-			res = letra.compare("o");
-			if(res==0) palabra2=palabra2+k1+"4";
-			res = letra.compare("O");
-			if(res==0) palabra2=palabra2+k1+"4";
-			res = letra.compare("u");
-			if(res==0) palabra2=palabra2+k1+"5";
-			res = letra.compare("U");
-			if(res==0) palabra2=palabra2+k1+"5";
-			//cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
-		}
-		
-		found = g2.find(palabra[i]);
-		if (found != string::npos){
-			res = 0;
-			//cout<<palabra[i]<<" Es Vocal..."<<endl;
-			letra = palabra[i];
-			//cout<<"La letra es: "<<letra<<endl;
-			res = letra.compare("b");
-			if(res==0) palabra2=palabra2+k2+"1";
-			res = letra.compare("c");
-			if(res==0) palabra2=palabra2+k2+"2";	
-			res = letra.compare("d");
-			if(res==0) palabra2=palabra2+k2+"3";
-			res = letra.compare("f");
-			if(res==0) palabra2=palabra2+k2+"4";
-			res = letra.compare("g");
-			if(res==0) palabra2=palabra2+k2+"5";
-			res = letra.compare("h");
-			if(res==0) palabra2=palabra2+k2+"6";
-			res = letra.compare("j");
-			if(res==0) palabra2=palabra2+k2+"7";
-			res = letra.compare("k");
-			if(res==0) palabra2=palabra2+k2+"8";
-			res = letra.compare("l");
-			if(res==0) palabra2=palabra2+k2+"9";
-			res = letra.compare("m");
-			if(res==0) palabra2=palabra2+k2+"10";
-			res = letra.compare("n");
-			if(res==0) palabra2=palabra2+k2+"11";
-			res = letra.compare("Ò");
-			if(res==0) palabra2=palabra2+k2+"12";
-			res = letra.compare("p");
-			if(res==0) palabra2=palabra2+k2+"13";
-			res = letra.compare("q");
-			if(res==0) palabra2=palabra2+k2+"14";
-			res = letra.compare("r");
-			if(res==0) palabra2=palabra2+k2+"15";
-			res = letra.compare("s");
-			if(res==0) palabra2=palabra2+k2+"16";
-			res = letra.compare("t");
-			if(res==0) palabra2=palabra2+k2+"17";
-			res = letra.compare("v");
-			if(res==0) palabra2=palabra2+k2+"18";
-			res = letra.compare("w");
-			if(res==0) palabra2=palabra2+k2+"19";
-			res = letra.compare("x");
-			if(res==0) palabra2=palabra2+k2+"20";
-			res = letra.compare("y");
-			if(res==0) palabra2=palabra2+k2+"21";
-			res = letra.compare("z");
-			if(res==0) palabra2=palabra2+k2+"22";
-			
-			//cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
-		}
-		
-		
-		found = g3.find(palabra[i]);
-		if (found != string::npos){
-			res = 0;
-			//cout<<palabra[i]<<" Es Vocal..."<<endl;
-			letra = palabra[i];
-			//cout<<"La letra es: "<<letra<<endl;
-			res = letra.compare("B");
-			if(res==0) palabra2=palabra2+k3+"1";
-			res = letra.compare("C");
-			if(res==0) palabra2=palabra2+k3+"2";	
-			res = letra.compare("D");
-			if(res==0) palabra2=palabra2+k3+"3";
-			res = letra.compare("F");
-			if(res==0) palabra2=palabra2+k3+"4";
-			res = letra.compare("G");
-			if(res==0) palabra2=palabra2+k3+"5";
-			res = letra.compare("H");
-			if(res==0) palabra2=palabra2+k3+"6";
-			res = letra.compare("J");
-			if(res==0) palabra2=palabra2+k3+"7";
-			res = letra.compare("K");
-			if(res==0) palabra2=palabra2+k3+"8";
-			res = letra.compare("L");
-			if(res==0) palabra2=palabra2+k3+"9";
-			res = letra.compare("M");
-			if(res==0) palabra2=palabra2+k3+"10";
-			res = letra.compare("N");
-			if(res==0) palabra2=palabra2+k3+"11";
-			res = letra.compare("—");
-			if(res==0) palabra2=palabra2+k3+"12";
-			res = letra.compare("P");
-			if(res==0) palabra2=palabra2+k3+"13";
-			res = letra.compare("Q");
-			if(res==0) palabra2=palabra2+k3+"14";
-			res = letra.compare("R");
-			if(res==0) palabra2=palabra2+k3+"15";
-			res = letra.compare("S");
-			if(res==0) palabra2=palabra2+k3+"16";
-			res = letra.compare("T");
-			if(res==0) palabra2=palabra2+k3+"17";
-			res = letra.compare("V");
-			if(res==0) palabra2=palabra2+k3+"18";
-			res = letra.compare("W");
-			if(res==0) palabra2=palabra2+k3+"19";
-			res = letra.compare("X");
-			if(res==0) palabra2=palabra2+k3+"20";
-			res = letra.compare("Y");
-			if(res==0) palabra2=palabra2+k3+"21";
-			res = letra.compare("Z");
-			if(res==0) palabra2=palabra2+k3+"22";
-			
-			//cout<<palabra[1]<<" cifrada es: "<<palabra2<<endl;
-		}
-		/*
-		//valida si es consonante minuscula
-		size_t1 found = g2.find(palabra[i]);
-		if (found != string::npos){
+    char k1=linea[0];
+    char k2=linea[1];
+    char k3=linea[2];
+	//descifrado(texto);
+	
+	string consonantes = "";
+	string texto2 ="";
+	//char caracter = cadena[0];
+	
+    for (int i = 0; i < cadena.length(); i++) {
+        char caracter = cadena[i];
+		//cout<<"caracter ->"<<caracter<<endl;
+        if (caracter == k1 || caracter == k2 || caracter == k3) {
+            //consonantes += caracter;
+            if(consonantes== "g1") texto2+="B";
+			if(consonantes== "g2") texto2+="C";
+			if(consonantes== "g3") texto2+="D";
+			if(consonantes=="g4") texto2+="F";
+			if(consonantes=="g5") texto2+="G";
+			if(consonantes=="g6") texto2+="H";
+			if(consonantes=="g7") texto2+="J";
+			if(consonantes=="g8") texto2+="K";
+			if(consonantes=="g9") texto2+="L";
+			if(consonantes=="g10") texto2+="M";
+			if(consonantes=="g11") texto2+="N";
+			if(consonantes=="g12") texto2+="—";
+			if(consonantes=="g13") texto2+="P";
+			if(consonantes=="g14") texto2+="Q";
+			if(consonantes=="g15") texto2+="R";
+			if(consonantes=="g16") texto2+="S";
+			if(consonantes=="g17") texto2+="T";
+			if(consonantes=="g18") texto2+="V";
+			if(consonantes=="g19") texto2+="W";
+			if(consonantes=="g20") texto2+="X";
+			if(consonantes=="g21") texto2+="Y";
+			if(consonantes=="g22") texto2+="Z";
+            
+            if(consonantes== "m1") texto2+="b";
+			if(consonantes== "m2") texto2+="c";
+			if(consonantes== "m3") texto2+="d";
+			if(consonantes=="m4") texto2+="f";
+			if(consonantes=="m5") texto2+="g";
+			if(consonantes=="m6") texto2+="h";
+			if(consonantes=="m7") texto2+="j";
+			if(consonantes=="m8") texto2+="k";
+			if(consonantes=="m9") texto2+="l";
+			if(consonantes=="m10") texto2+="m";
+			if(consonantes=="m11") texto2+="n";
+			if(consonantes=="m12") texto2+="Ò";
+			if(consonantes=="m13") texto2+="p";
+			if(consonantes=="m14") texto2+="q";
+			if(consonantes=="m15") texto2+="r";
+			if(consonantes=="m16") texto2+="s";
+			if(consonantes=="m17") texto2+="t";
+			if(consonantes=="m18") texto2+="v";
+			if(consonantes=="m19") texto2+="w";
+			if(consonantes=="m20") texto2+="x";
+			if(consonantes=="m21") texto2+="y";
+			if(consonantes=="m22") texto2+="z";
+            
+            if(consonantes== "U1") texto2+="a";
+			if(consonantes== "U2") texto2+="e";
+			if(consonantes== "U3") texto2+="i";
+			if(consonantes=="U4") texto2+="o";
+			if(consonantes=="U5") texto2+="u";
+			if(consonantes=="U6") texto2+="A";
+			if(consonantes=="U7") texto2+="E";
+			if(consonantes=="U8") texto2+="I";
+			if(consonantes=="U9") texto2+="O";
+			if(consonantes=="U10") texto2+="U";
+			//cout<<"lo que encontro "<<consonantes<<" caracter "<<caracter<<endl;
+            
+            consonantes=cadena[i];
+			//cout<<"found "<<consonantes<<" caracter "<<caracter<<endl;
+            
+        } 
+		else {
+        	consonantes += caracter;
+			//cout<<"else "<<consonantes<<endl;
 			
 		}
-		
-		//valida si es consonante mayudscula
-		size_t2 found = g3.find(palabra[i]);
-		if (found != string::npos){
-			
-		}
-		*/
-	}
-	//cout<<"Dato cifrado: "<<palabra2<<endl; 	
-	return(palabra2);	
+    }
+    //La ultima palabra
+    if(consonantes== "g1") texto2+="B";
+			if(consonantes== "g2") texto2+="C";
+			if(consonantes== "g3") texto2+="D";
+			if(consonantes=="g4") texto2+="F";
+			if(consonantes=="g5") texto2+="G";
+			if(consonantes=="g6") texto2+="H";
+			if(consonantes=="g7") texto2+="J";
+			if(consonantes=="g8") texto2+="K";
+			if(consonantes=="g9") texto2+="L";
+			if(consonantes=="g10") texto2+="M";
+			if(consonantes=="g11") texto2+="N";
+			if(consonantes=="g12") texto2+="—";
+			if(consonantes=="g13") texto2+="P";
+			if(consonantes=="g14") texto2+="Q";
+			if(consonantes=="g15") texto2+="R";
+			if(consonantes=="g16") texto2+="S";
+			if(consonantes=="g17") texto2+="T";
+			if(consonantes=="g18") texto2+="V";
+			if(consonantes=="g19") texto2+="W";
+			if(consonantes=="g20") texto2+="X";
+			if(consonantes=="g21") texto2+="Y";
+			if(consonantes=="g22") texto2+="Z";
+            
+            if(consonantes== "m1") texto2+="b";
+			if(consonantes== "m2") texto2+="c";
+			if(consonantes== "m3") texto2+="d";
+			if(consonantes=="m4") texto2+="f";
+			if(consonantes=="m5") texto2+="g";
+			if(consonantes=="m6") texto2+="h";
+			if(consonantes=="m7") texto2+="j";
+			if(consonantes=="m8") texto2+="k";
+			if(consonantes=="m9") texto2+="l";
+			if(consonantes=="m10") texto2+="m";
+			if(consonantes=="m11") texto2+="n";
+			if(consonantes=="m12") texto2+="Ò";
+			if(consonantes=="m13") texto2+="p";
+			if(consonantes=="m14") texto2+="q";
+			if(consonantes=="m15") texto2+="r";
+			if(consonantes=="m16") texto2+="s";
+			if(consonantes=="m17") texto2+="t";
+			if(consonantes=="m18") texto2+="v";
+			if(consonantes=="m19") texto2+="w";
+			if(consonantes=="m20") texto2+="x";
+			if(consonantes=="m21") texto2+="y";
+			if(consonantes=="m22") texto2+="z";
+            
+            if(consonantes== "U1") texto2+="a";
+			if(consonantes== "U2") texto2+="e";
+			if(consonantes== "U3") texto2+="i";
+			if(consonantes=="U4") texto2+="o";
+			if(consonantes=="U5") texto2+="u";
+			if(consonantes=="U6") texto2+="A";
+			if(consonantes=="U7") texto2+="E";
+			if(consonantes=="U8") texto2+="I";
+			if(consonantes=="U9") texto2+="O";
+			if(consonantes=="U10") texto2+="U";
+    //cout<<"palabra descifrada->"<<texto2<<endl;
+	return(texto2);
 }
 
 //// SE AGREGA LA ESTRUCTURA DE ARBOL AVL
@@ -832,8 +809,8 @@ void agrega_perfil(string texto){
 	         archivo_lectura.close(); // Cerrar el archivo
 	         ofstream archivo_escritura(archivo_str.c_str()); // Abrir el archivo en modo de escritura
 	         if (archivo_escritura.is_open()) {
-	            //archivo_escritura<< cifrado(texto) << endl << contenido; // Escribir el texto al principio del archivo y luego el contenido leÌdo anteriormente
-	            archivo_escritura<< texto << endl << contenido;
+	            archivo_escritura<< cifrado(texto) << endl << contenido; // Escribir el texto al principio del archivo y luego el contenido leÌdo anteriormente
+	            //archivo_escritura<< texto << endl << contenido;
 				archivo_escritura.close(); // Cerrar el archivo
 	         } else {
 	            cout << "Error al abrir el archivo en modo de escritura." << endl;
@@ -875,7 +852,7 @@ avl *avl::update(avl *root)
             //std::istringstream ss(linea);
             //convierto todo a mayusculas para comparar
             gotoxy(10,x);
-            cout<<linea<<endl;
+            cout<<descifra(linea)<<endl;
             x+=1;
             //Palabra palabra;
             //palabra=to_upper(palabra);
@@ -2384,116 +2361,12 @@ void login(){
 	salida();
 //	system("pause");
 }
-/*
-void intento(){
-	
-	string texto="g4U2g9U3g2U3g3U1g3";
-	string temp = "";
-	string caracter[]="";
-	string texto2;
-	string k1;
-	string k2;
-	string k3;
-	
-	string nombreArchivo = "llave.txt";
-	ifstream archivo(nombreArchivo.c_str());
-	string linea;
-	
-	
-	// Obtener l√≠nea de archivo, y almacenar contenido en "linea"
-	getline(archivo, linea);
-    //cout<<"Dato original: "<<palabra<<endl;
-    k1=linea[0];
-    k2=linea[1];
-    k3=linea[2];
-	//descifrado(texto);
-	
-	
-	for(int i=1; i<=texto.length();;i++){
-		//if((texto[i] ==char("g")) or (texto[i] == char("U")) or (texto[i] == char("m"))){
-		caracter= texto[i];
-		size_t found = k1.find(palabra[i]);
-		if (found != string::npos){
-		    res = 0;
-			//cout<<palabra[i]<<" Es Vocal..."<<endl;
-			letra = palabra[i];
-			//convierte y guarda
-			//es vocal
-			if(temp[0]=="U"){
-				if("U1") texto2+="a";
-				if("U2") texto2+="e";
-				if("U3") texto2+="i";
-				if("U4") texto2+="o";
-				if("U5") texto2+="u";
-				if("U6") texto2+="A";
-				if("U7") texto2+="E";
-				if("U8") texto2+="I";
-				if("U9") texto2+="O";
-				if("U10") texto2+="U";
-			}
-			//es consonante minuscula
-			if(temp[0]=="m"){
-				if("m1") texto2+="b";
-				if("m2") texto2+="c";
-				if("m3") texto2+="d";
-				if("m4") texto2+="f";
-				if("m5") texto2+="g";
-				if("m6") texto2+="h";
-				if("m7") texto2+="j";
-				if("m8") texto2+="k";
-				if("m9") texto2+="l";
-				if("m10") texto2+="m";
-				if("m11") texto2+="n";
-				if("m12") texto2+="Ò";
-				if("m13") texto2+="p";
-				if("m14") texto2+="q";
-				if("m15") texto2+="r";
-				if("m16") texto2+="s";
-				if("m17") texto2+="t";
-				if("m18") texto2+="v";
-				if("m19") texto2+="w";
-				if("m20") texto2+="x";
-				if("m21") texto2+="y";
-				if("m22") texto2+="z";
-			}
-			//es consonante mayuscula
-			if(temp[0]=="g"){
-				if("g1") texto2+="B";
-				if("g2") texto2+="C";
-				if("g3") texto2+="D";
-				if("g4") texto2+="F";
-				if("g5") texto2+="G";
-				if("g6") texto2+="H";
-				if("g7") texto2+="J";
-				if("g8") texto2+="K";
-				if("g9") texto2+="L";
-				if("g10") texto2+="M";
-				if("g11") texto2+="N";
-				if("g12") texto2+="—";
-				if("g13") texto2+="P";
-				if("g14") texto2+="Q";
-				if("g15") texto2+="R";
-				if("g16") texto2+="S";
-				if("g17") texto2+="T";
-				if("g18") texto2+="V";
-				if("g19") texto2+="W";
-				if("g20") texto2+="X";
-				if("g21") texto2+="Y";
-				if("g22") texto2+="Z";
-			}
-			//limpia la temp
-			temp=texto[i];
-		} else {
-			temp+=texto[i];
-		}
-	}
-	cout<<"la palabra original era: "<<texto<<" y la descifrada es: "<<texto2<<endl;
-}
-*/
+
+
 //Metodo principal para llamar las distintas funciones
 int main() {
 	//intento();
-	//system("pause");
+	system("pause");
 	//limpia archivos 2??.wav para evitar problemas
 	system("del c:\\lib\\voices\\200.wav /s");
 	system("del c:\\lib\\voices\\201.wav /s");
