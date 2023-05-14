@@ -2332,16 +2332,18 @@ void login(){
 		        //return 1;
 		    }
 			if(continua) {
-				char *m1 =strdup("Continua");
-				char *m2 = strdup("Error");
+				//char *m1 =strdup("Continua");
+				//char *m2 = strdup("Error");
 				//MSGBOX(m1 ,m2 );
 				menu();
 			}
 		} else {
 			//crea usuario
 			if(iopt==2){
-				
-				menu();
+				char *m1 =strdup("Esta opcion aun no esta habilitada");
+				char *m2 = strdup("Error");
+				if(iopt!=4) MSGBOX(m1 ,m2 );
+				//menu();
 			} else {
 			
 				//invitado
@@ -2366,7 +2368,7 @@ void login(){
 //Metodo principal para llamar las distintas funciones
 int main() {
 	//intento();
-	system("pause");
+	//system("pause");
 	//limpia archivos 2??.wav para evitar problemas
 	system("del c:\\lib\\voices\\200.wav /s");
 	system("del c:\\lib\\voices\\201.wav /s");
