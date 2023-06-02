@@ -197,7 +197,8 @@ void gotoxy(int x,int y){
       SetConsoleCursorPosition(hcon,dwPos);  
  }  
 void product_intro(){
-
+setlocale(LC_ALL, ""); 
+	
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
     // Obtener el color actual de la consola
@@ -256,6 +257,7 @@ cout<<"                                                            \\______/    
 gotoxy(45,31);
 SetConsoleTextAttribute(hConsole, currentAttributes);
 cout<<"Powered by DevCpp, Phyton, Google Translate and AWS Polly"<<endl<<endl<<endl;
+gotoxy(45,35);
 cout<<"Código disponible en : https://github.com/ejuarez83/Traductor_en_C"<<endl<<endl;
 
 Sleep(5000);
@@ -2458,7 +2460,7 @@ void login(){
 		gotoxy(50,10);
 		cout<<"#####################################################################"<<endl;
 		gotoxy(50,11);
-		cout<<"                                login                                "<<endl;
+		cout<<"                                LOGIN                                "<<endl;
 		gotoxy(50,12);
 		cout<<"#####################################################################"<<endl;
 		gotoxy(50,13);
