@@ -1,3 +1,5 @@
 erick,m2U1m16U1
 kenny,m2U1m15m15U4
 manuel,m2U1m16U1
+Luis,m2U1m16U1
+ERICK,g2U6g16U6

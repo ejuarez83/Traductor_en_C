@@ -39,6 +39,155 @@ bool menu_sound=false;
 
 using namespace boost::algorithm;
 using namespace std;
+
+void drawWindowFrame(int width, int height) {
+    std::string horizontalLine(width - 2, '#');
+
+    std::cout << '#' << horizontalLine << '#' << std::endl;
+
+    for (int i = 0; i < height - 2; ++i) {
+        std::cout << '#' << std::string(width - 2, ' ') << '#' << std::endl;
+    }
+
+    std::cout << '#' << horizontalLine << '#' << std::endl;
+}
+
+int getWindowWidth() {
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    return csbi.srWindow.Right - csbi.srWindow.Left + 1;
+}
+
+int getWindowHeight() {
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    return csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+}
+
+void bordes(){
+	int width = getWindowWidth();   // Obtener el ancho de la ventana actual
+    int height = getWindowHeight(); // Obtener el alto de la ventana actual
+
+    drawWindowFrame(width, height);
+}
+//#include <ncurses.h>
+/*
+void bordes() {
+    // Inicializar ncurses
+    initscr();
+    cbreak();
+    noecho();
+
+    // Obtener el tamaño de la pantalla
+    int rows, cols;
+    getmaxyx(stdscr, rows, cols);
+
+    // Dibujar el marco
+    for (int i = 0; i < cols; i++) {
+        mvaddch(0, i, '-');                         // Línea superior
+        mvaddch(rows - 1, i, '-');                   // Línea inferior
+    }
+    for (int i = 0; i < rows; i++) {
+        mvaddch(i, 0, '|');                          // Línea izquierda
+        mvaddch(i, cols - 1, '|');                    // Línea derecha
+    }
+
+    // Refrescar la pantalla
+    refresh();
+
+    // Esperar la entrada del usuario
+    getch();
+
+    // Finalizar ncurses
+    endwin();
+
+    //return 0;
+}
+*/
+
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+void delay(int milliseconds) {
+    clock_t start_time = clock();
+    while (clock() < start_time + milliseconds)
+        ;
+}
+
+void clearConsole() {
+    #if defined(_WIN32) || defined(_WIN64)
+        std::system("cls");
+    #else
+        std::system("clear");
+    #endif
+}
+
+void intro_esp() {
+	
+	HWND console = GetConsoleWindow();
+    RECT rect;
+    GetWindowRect(console, &rect);
+    MoveWindow(console, rect.left, rect.top, 800, 600, TRUE);
+
+    int width = 80; // Ancho de la consola
+    int height = 24; // Alto de la consola
+
+    std::string text = "BANNER 3D";
+
+    while (true) {
+        clearConsole();
+
+        // Animación 3D simple
+        for (int z = 0; z < 20; z++) {
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    // Cálculo del efecto 3D
+                    float depth = static_cast<float>(z) / 20.0f;
+                    float displacement = static_cast<float>(y) / height;
+                    int xPos = static_cast<int>(x + displacement * depth * 20);
+                    int yPos = static_cast<int>(y + depth * 10);
+
+                    // Mostrar el carácter de texto
+                    if (xPos >= 0 && xPos < width && yPos >= 0 && yPos < height) {
+                        if (z == 19)
+                            std::cout << text[x % text.length()];
+                        else
+                            std::cout << " ";
+                    } else {
+                        std::cout << " ";
+                    }
+                }
+                std::cout << std::endl;
+            }
+
+            delay(50); // Retardo para la animación
+            clearConsole();
+        }
+    }
+
+    //return 0;
+}
+/*
+void delay(int milliseconds) {
+    Sleep(milliseconds);
+}*/
+
+starwars() {
+    std::string introText = "A long time ago in a galaxy far, far away...";
+    std::string animatedText;
+
+    for (size_t i = 0; i < introText.size(); ++i) {
+    animatedText += introText[i];
+    std::cout << animatedText << std::endl;
+    delay(100);
+    system("cls");
+}
+
+    //return 0;
+}
+
+
 void gotoxy(int x,int y){  
       HANDLE hcon;  
       hcon = GetStdHandle(STD_OUTPUT_HANDLE);  
@@ -47,6 +196,71 @@ void gotoxy(int x,int y){
       dwPos.Y= y;  
       SetConsoleCursorPosition(hcon,dwPos);  
  }  
+void product_intro(){
+
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    // Obtener el color actual de la consola
+    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+    GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+    WORD currentAttributes = consoleInfo.wAttributes;
+
+
+system("cls");
+SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+gotoxy(50,11);                                                                                              
+cout<<" /$$$$$$$$                       /$$                       /$$                                 "<<endl;
+gotoxy(50,12);
+cout<<"|__  $$__/                      | $$                      | $$                           "<<endl;
+gotoxy(50,13);
+cout<<"   | $$  /$$$$$$  /$$$$$$   /$$$$$$$ /$$   /$$  /$$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$    "<<endl;
+gotoxy(50,14);
+cout<<"   | $$ /$$__  $$|____  $$ /$$__  $$| $$  | $$ /$$_____/|_  $$_/   /$$__  $$ /$$__  $$   "<<endl;
+gotoxy(50,15);
+cout<<"   | $$| $$  \\__/ /$$$$$$$| $$  | $$| $$  | $$| $$        | $$    | $$  \\ $$| $$  \\ __/   "<<endl;
+gotoxy(50,16);
+cout<<"   | $$| $$      /$$__  $$| $$  | $$| $$  | $$| $$        | $$ /$$| $$  | $$| $$         "<<endl;
+gotoxy(50,17);
+cout<<"   | $$| $$     |  $$$$$$$|  $$$$$$$|  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$$$/| $$         "<<endl;
+gotoxy(50,18);
+cout<<"   |__/|__/      \\_______/ \\_______/ \\______/  \\_______/   \\___/   \\______/ |__/     "<<endl;    
+gotoxy(50,19);
+cout<<endl<<endl;                                                                      
+
+//Se unen los colores primarios para hacer blanco                   
+SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);         
+gotoxy(45,20);                                                                                      
+cout<<" /$$      /$$           /$$   /$$     /$$ /$$ /$$                      /$$  /$$              "<<endl;
+gotoxy(45,21);
+cout<<"| $$$    /$$$          | $$  | $$    |__/| $$|__/                     |__/ |__/                "<<endl;
+gotoxy(45,22);
+cout<<"| $$$$  /$$$$ /$$   /$$| $$ /$$$$$$   /$$| $$ /$$ /$$$$$$$   /$$$$$$  /$$   /$$  /$$$$$$ "<<endl;
+gotoxy(45,23);
+SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE);
+cout<<"| $$ $$/$$ $$| $$  | $$| $$|_  $$_/  | $$| $$| $$| $$__  $$ /$$__  $$| $$  | $$ /$$__  $$"<<endl;
+gotoxy(45,24);
+cout<<"| $$  $$$| $$| $$  | $$| $$  | $$    | $$| $$| $$| $$  \\ $$| $$  \\ $$| $$  | $$| $$$$$$$$"<<endl;
+gotoxy(45,25);
+cout<<"| $$\\  $ | $$| $$  | $$| $$  | $$ /$$| $$| $$| $$| $$  | $$| $$  | $$| $$  | $$| $$_____/"<<endl;
+SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
+gotoxy(45,26);
+cout<<"| $$ \\/  | $$|  $$$$$$/| $$  |  $$$$/| $$| $$| $$| $$  | $$|  $$$$$$$|  $$$$$$/|  $$$$$$$"<<endl;
+gotoxy(45,27);
+cout<<"|__/     |__/ \\______/ |__/   \\ ___/  |__/|__/|__/|__/  |__/ \\____  $$ \\______/  \\_______/"<<endl;
+gotoxy(45,28);
+cout<<"                                                            /$$  \\ $$                    "<<endl;
+gotoxy(45,29);
+cout<<"                                                           |  $$$$$$/                    "<<endl;
+gotoxy(45,30);
+cout<<"                                                            \\______/       "<<endl;
+gotoxy(45,31);
+SetConsoleTextAttribute(hConsole, currentAttributes);
+cout<<"Powered by DevCpp, Phyton, Google Translate and AWS Polly"<<endl<<endl<<endl;
+cout<<"Código disponible en : https://github.com/ejuarez83/Traductor_en_C"<<endl<<endl;
+
+Sleep(5000);
+system("pause");
+}
 
 //Funcion para generar audios desde AWS Polly y luego de descargarlo en MP3 lo convierte en WAV
 string aws_audio(int index, string word, int wordindex, string palabra){
@@ -395,62 +609,62 @@ string descifra(string cadena){
 		//cout<<"caracter ->"<<caracter<<endl;
         if (caracter == k1 || caracter == k2 || caracter == k3) {
             //consonantes += caracter;
-            if(consonantes== "g1") texto2+="B";
-			if(consonantes== "g2") texto2+="C";
-			if(consonantes== "g3") texto2+="D";
-			if(consonantes=="g4") texto2+="F";
-			if(consonantes=="g5") texto2+="G";
-			if(consonantes=="g6") texto2+="H";
-			if(consonantes=="g7") texto2+="J";
-			if(consonantes=="g8") texto2+="K";
-			if(consonantes=="g9") texto2+="L";
-			if(consonantes=="g10") texto2+="M";
-			if(consonantes=="g11") texto2+="N";
-			if(consonantes=="g12") texto2+="Ñ";
-			if(consonantes=="g13") texto2+="P";
-			if(consonantes=="g14") texto2+="Q";
-			if(consonantes=="g15") texto2+="R";
-			if(consonantes=="g16") texto2+="S";
-			if(consonantes=="g17") texto2+="T";
-			if(consonantes=="g18") texto2+="V";
-			if(consonantes=="g19") texto2+="W";
-			if(consonantes=="g20") texto2+="X";
-			if(consonantes=="g21") texto2+="Y";
-			if(consonantes=="g22") texto2+="Z";
+            if(consonantes== std::string(1, k3) +"1") texto2+="B";
+			if(consonantes== std::string(1, k3) +"2") texto2+="C";
+			if(consonantes== std::string(1, k3) +"3") texto2+="D";
+			if(consonantes== std::string(1, k3) +"4") texto2+="F";
+			if(consonantes== std::string(1, k3) +"5") texto2+="G";
+			if(consonantes== std::string(1, k3) +"6") texto2+="H";
+			if(consonantes== std::string(1, k3) +"7") texto2+="J";
+			if(consonantes== std::string(1, k3) +"8") texto2+="K";
+			if(consonantes== std::string(1, k3) +"9") texto2+="L";
+			if(consonantes== std::string(1, k3) +"10") texto2+="M";
+			if(consonantes== std::string(1, k3) +"11") texto2+="N";
+			if(consonantes== std::string(1, k3) +"12") texto2+="Ñ";
+			if(consonantes== std::string(1, k3) +"13") texto2+="P";
+			if(consonantes== std::string(1, k3) +"14") texto2+="Q";
+			if(consonantes== std::string(1, k3) +"15") texto2+="R";
+			if(consonantes== std::string(1, k3) +"16") texto2+="S";
+			if(consonantes== std::string(1, k3) +"17") texto2+="T";
+			if(consonantes== std::string(1, k3) +"18") texto2+="V";
+			if(consonantes== std::string(1, k3) +"19") texto2+="W";
+			if(consonantes== std::string(1, k3) +"20") texto2+="X";
+			if(consonantes== std::string(1, k3) +"21") texto2+="Y";
+			if(consonantes== std::string(1, k3) +"22") texto2+="Z";
             
-            if(consonantes== "m1") texto2+="b";
-			if(consonantes== "m2") texto2+="c";
-			if(consonantes== "m3") texto2+="d";
-			if(consonantes=="m4") texto2+="f";
-			if(consonantes=="m5") texto2+="g";
-			if(consonantes=="m6") texto2+="h";
-			if(consonantes=="m7") texto2+="j";
-			if(consonantes=="m8") texto2+="k";
-			if(consonantes=="m9") texto2+="l";
-			if(consonantes=="m10") texto2+="m";
-			if(consonantes=="m11") texto2+="n";
-			if(consonantes=="m12") texto2+="ñ";
-			if(consonantes=="m13") texto2+="p";
-			if(consonantes=="m14") texto2+="q";
-			if(consonantes=="m15") texto2+="r";
-			if(consonantes=="m16") texto2+="s";
-			if(consonantes=="m17") texto2+="t";
-			if(consonantes=="m18") texto2+="v";
-			if(consonantes=="m19") texto2+="w";
-			if(consonantes=="m20") texto2+="x";
-			if(consonantes=="m21") texto2+="y";
-			if(consonantes=="m22") texto2+="z";
+            if(consonantes== std::string(1, k2) +"1") texto2+="b";
+			if(consonantes== std::string(1, k2) +"2") texto2+="c";
+			if(consonantes== std::string(1, k2) +"3") texto2+="d";
+			if(consonantes== std::string(1, k2) +"4") texto2+="f";
+			if(consonantes== std::string(1, k2) +"5") texto2+="g";
+			if(consonantes== std::string(1, k2) +"6") texto2+="h";
+			if(consonantes== std::string(1, k2) +"7") texto2+="j";
+			if(consonantes== std::string(1, k2) +"8") texto2+="k";
+			if(consonantes== std::string(1, k2) +"9") texto2+="l";
+			if(consonantes== std::string(1, k2) +"10") texto2+="m";
+			if(consonantes== std::string(1, k2) +"11") texto2+="n";
+			if(consonantes== std::string(1, k2) +"12") texto2+="ñ";
+			if(consonantes== std::string(1, k2) +"13") texto2+="p";
+			if(consonantes== std::string(1, k2) +"14") texto2+="q";
+			if(consonantes== std::string(1, k2) +"15") texto2+="r";
+			if(consonantes== std::string(1, k2) +"16") texto2+="s";
+			if(consonantes== std::string(1, k2) +"17") texto2+="t";
+			if(consonantes== std::string(1, k2) +"18") texto2+="v";
+			if(consonantes== std::string(1, k2) +"19") texto2+="w";
+			if(consonantes== std::string(1, k2) +"20") texto2+="x";
+			if(consonantes== std::string(1, k2) +"21") texto2+="y";
+			if(consonantes== std::string(1, k2) +"22") texto2+="z";
             
-            if(consonantes== "U1") texto2+="a";
-			if(consonantes== "U2") texto2+="e";
-			if(consonantes== "U3") texto2+="i";
-			if(consonantes=="U4") texto2+="o";
-			if(consonantes=="U5") texto2+="u";
-			if(consonantes=="U6") texto2+="A";
-			if(consonantes=="U7") texto2+="E";
-			if(consonantes=="U8") texto2+="I";
-			if(consonantes=="U9") texto2+="O";
-			if(consonantes=="U10") texto2+="U";
+            if(consonantes== std::string(1, k1) +"1") texto2+="a";
+			if(consonantes== std::string(1, k1) +"2") texto2+="e";
+			if(consonantes== std::string(1, k1) +"3") texto2+="i";
+			if(consonantes== std::string(1, k1) +"4") texto2+="o";
+			if(consonantes== std::string(1, k1) +"5") texto2+="u";
+			if(consonantes== std::string(1, k1) +"6") texto2+="A";
+			if(consonantes== std::string(1, k1) +"7") texto2+="E";
+			if(consonantes== std::string(1, k1) +"8") texto2+="I";
+			if(consonantes== std::string(1, k1) +"9") texto2+="O";
+			if(consonantes== std::string(1, k1) +"10") texto2+="U";
 			//cout<<"lo que encontro "<<consonantes<<" caracter "<<caracter<<endl;
             
             consonantes=cadena[i];
@@ -464,62 +678,62 @@ string descifra(string cadena){
 		}
     }
     //La ultima palabra
-    if(consonantes== "g1") texto2+="B";
-			if(consonantes== "g2") texto2+="C";
-			if(consonantes== "g3") texto2+="D";
-			if(consonantes=="g4") texto2+="F";
-			if(consonantes=="g5") texto2+="G";
-			if(consonantes=="g6") texto2+="H";
-			if(consonantes=="g7") texto2+="J";
-			if(consonantes=="g8") texto2+="K";
-			if(consonantes=="g9") texto2+="L";
-			if(consonantes=="g10") texto2+="M";
-			if(consonantes=="g11") texto2+="N";
-			if(consonantes=="g12") texto2+="Ñ";
-			if(consonantes=="g13") texto2+="P";
-			if(consonantes=="g14") texto2+="Q";
-			if(consonantes=="g15") texto2+="R";
-			if(consonantes=="g16") texto2+="S";
-			if(consonantes=="g17") texto2+="T";
-			if(consonantes=="g18") texto2+="V";
-			if(consonantes=="g19") texto2+="W";
-			if(consonantes=="g20") texto2+="X";
-			if(consonantes=="g21") texto2+="Y";
-			if(consonantes=="g22") texto2+="Z";
+    if(consonantes== std::string(1, k3) +"1") texto2+="B";
+			if(consonantes== std::string(1, k3) +"2") texto2+="C";
+			if(consonantes== std::string(1, k3) +"3") texto2+="D";
+			if(consonantes== std::string(1, k3) +"4") texto2+="F";
+			if(consonantes== std::string(1, k3) +"5") texto2+="G";
+			if(consonantes== std::string(1, k3) +"6") texto2+="H";
+			if(consonantes== std::string(1, k3) +"7") texto2+="J";
+			if(consonantes== std::string(1, k3) +"8") texto2+="K";
+			if(consonantes== std::string(1, k3) +"9") texto2+="L";
+			if(consonantes== std::string(1, k3) +"10") texto2+="M";
+			if(consonantes== std::string(1, k3) +"11") texto2+="N";
+			if(consonantes== std::string(1, k3) +"12") texto2+="Ñ";
+			if(consonantes== std::string(1, k3) +"13") texto2+="P";
+			if(consonantes== std::string(1, k3) +"14") texto2+="Q";
+			if(consonantes== std::string(1, k3) +"15") texto2+="R";
+			if(consonantes== std::string(1, k3) +"16") texto2+="S";
+			if(consonantes== std::string(1, k3) +"17") texto2+="T";
+			if(consonantes== std::string(1, k3) +"18") texto2+="V";
+			if(consonantes== std::string(1, k3) +"19") texto2+="W";
+			if(consonantes== std::string(1, k3) +"20") texto2+="X";
+			if(consonantes== std::string(1, k3) +"21") texto2+="Y";
+			if(consonantes== std::string(1, k3) +"22") texto2+="Z";
             
-            if(consonantes== "m1") texto2+="b";
-			if(consonantes== "m2") texto2+="c";
-			if(consonantes== "m3") texto2+="d";
-			if(consonantes=="m4") texto2+="f";
-			if(consonantes=="m5") texto2+="g";
-			if(consonantes=="m6") texto2+="h";
-			if(consonantes=="m7") texto2+="j";
-			if(consonantes=="m8") texto2+="k";
-			if(consonantes=="m9") texto2+="l";
-			if(consonantes=="m10") texto2+="m";
-			if(consonantes=="m11") texto2+="n";
-			if(consonantes=="m12") texto2+="ñ";
-			if(consonantes=="m13") texto2+="p";
-			if(consonantes=="m14") texto2+="q";
-			if(consonantes=="m15") texto2+="r";
-			if(consonantes=="m16") texto2+="s";
-			if(consonantes=="m17") texto2+="t";
-			if(consonantes=="m18") texto2+="v";
-			if(consonantes=="m19") texto2+="w";
-			if(consonantes=="m20") texto2+="x";
-			if(consonantes=="m21") texto2+="y";
-			if(consonantes=="m22") texto2+="z";
+            if(consonantes== std::string(1, k2) +"1") texto2+="b";
+			if(consonantes== std::string(1, k2) +"2") texto2+="c";
+			if(consonantes== std::string(1, k2) +"3") texto2+="d";
+			if(consonantes== std::string(1, k2) +"4") texto2+="f";
+			if(consonantes== std::string(1, k2) +"5") texto2+="g";
+			if(consonantes== std::string(1, k2) +"6") texto2+="h";
+			if(consonantes== std::string(1, k2) +"7") texto2+="j";
+			if(consonantes== std::string(1, k2) +"8") texto2+="k";
+			if(consonantes== std::string(1, k2) +"9") texto2+="l";
+			if(consonantes== std::string(1, k2) +"10") texto2+="m";
+			if(consonantes== std::string(1, k2) +"11") texto2+="n";
+			if(consonantes== std::string(1, k2) +"12") texto2+="ñ";
+			if(consonantes== std::string(1, k2) +"13") texto2+="p";
+			if(consonantes== std::string(1, k2) +"14") texto2+="q";
+			if(consonantes== std::string(1, k2) +"15") texto2+="r";
+			if(consonantes== std::string(1, k2) +"16") texto2+="s";
+			if(consonantes== std::string(1, k2) +"17") texto2+="t";
+			if(consonantes== std::string(1, k2) +"18") texto2+="v";
+			if(consonantes== std::string(1, k2) +"19") texto2+="w";
+			if(consonantes== std::string(1, k2) +"20") texto2+="x";
+			if(consonantes== std::string(1, k2) +"21") texto2+="y";
+			if(consonantes== std::string(1, k2) +"22") texto2+="z";
             
-            if(consonantes== "U1") texto2+="a";
-			if(consonantes== "U2") texto2+="e";
-			if(consonantes== "U3") texto2+="i";
-			if(consonantes=="U4") texto2+="o";
-			if(consonantes=="U5") texto2+="u";
-			if(consonantes=="U6") texto2+="A";
-			if(consonantes=="U7") texto2+="E";
-			if(consonantes=="U8") texto2+="I";
-			if(consonantes=="U9") texto2+="O";
-			if(consonantes=="U10") texto2+="U";
+            if(consonantes== std::string(1, k1) +"1") texto2+="a";
+			if(consonantes== std::string(1, k1) +"2") texto2+="e";
+			if(consonantes== std::string(1, k1) +"3") texto2+="i";
+			if(consonantes== std::string(1, k1) +"4") texto2+="o";
+			if(consonantes== std::string(1, k1) +"5") texto2+="u";
+			if(consonantes== std::string(1, k1) +"6") texto2+="A";
+			if(consonantes== std::string(1, k1) +"7") texto2+="E";
+			if(consonantes== std::string(1, k1) +"8") texto2+="I";
+			if(consonantes== std::string(1, k1) +"9") texto2+="O";
+			if(consonantes== std::string(1, k1) +"10") texto2+="U";
     //cout<<"palabra descifrada->"<<texto2<<endl;
 	return(texto2);
 }
@@ -556,27 +770,12 @@ avl* avl::create(avl *root)
 {	int n_o,i;
 	char index[4], w[20],m[20],n[20],o[20],p[20];
 	root=insert(root,index,w,m,n,o,p);
-	/*
-	cout<<"\n Enter the number spanishs:\t";
-	cin>>n_o;
-	for(i=0;i<n_o;i++)
-	{	cout<<"\n Enter the "<<i+1<<" spanish";
-		cin>>w;
-		cout<<"\n Enter the english:";
-		cin>>m;
-		cout<<"\n Enter the french:";
-		cin>>n;
-		cout<<"\n Enter the german:";
-		cin>>o;
-		cout<<"\n Enter the italian:";
-		cin>>p;
-		root=insert(root,w,m,n,o,p);
-	}*/
+	
 	return root;
 }
 
 avl* avl::insert(avl *root,char index[] , char w[],char m[],char n[], char o[], char p[])
-{	if(root==NULL)
+{	if(root==NULL) //No tiene hijos
 	{	root=new avl;
 		strcpy(root->index,index);
 		strcpy(root->spanish,w);
@@ -590,34 +789,35 @@ avl* avl::insert(avl *root,char index[] , char w[],char m[],char n[], char o[], 
 	}
     else
     {
-	  if(strcmp(w,root->spanish)>0)
+	  if(strcmp(w,root->spanish)>0) //Tiene hijos en la izquierda entonces se pasa a la derecha
 	  {
-		root->right=insert(root->right,index,w,m,n,o,p);
-		if(BF(root)==2)
+		root->right=insert(root->right,index,w,m,n,o,p); //inserta el hjo en la derecha
+		///se busca el balance del arbol
+		if(BF(root)==2) //si el factor de balanceo es =2 hace rotacion hacia la derecha
 		{
-			if(strcmp(w,root->spanish)>=0)
+			if(strcmp(w,root->spanish)>=0) //Si la altura es mayor o igual a cero hace doble rotacion a la derecha
 				root=RR(root);
-			else
+			else // De lo contrario hace una rotacion simple a la derecha
 				root=RL(root);
 		}
 
 	  }
 	  else
 	  {
-		  if(strcmp(w,root->spanish)<0)
+		  if(strcmp(w,root->spanish)<0) //si la altura es menor que cero se crea el hijo a la izquierda
 		  {
-		  		root->left=insert(root->left,index,w,m,n,o,p);
-		  		if(BF(root)==-2)
+		  		root->left=insert(root->left,index,w,m,n,o,p); //inserta el hijo en la izquierda
+		  		if(BF(root)==-2) //Si el factor de balanceo es = -2 hace rotacion  a la izquierda
 		  		{
-		  			if(strcmp(w,root->spanish)<=0)
+		  			if(strcmp(w,root->spanish)<=0) //si la altura es menor o igual que cero hace rotacion doble a la izquierda
 		  				root=LL(root);
 		  			else
-		  				root=LR(root);
+		  				root=LR(root); //de lo contrario hace rotacion a la derecha
 		  		}
 		  }
 	   }
 	}
-	root->ht=height(root);
+	root->ht=height(root); //actualiza la altura total del arbol.
 	return root;
 }
 
@@ -793,6 +993,7 @@ void agrega_perfil(string texto){
 	//string texto;
     std::string archivo_str=user;
 	archivo_str+=".pfl";
+	SetFileAttributes(archivo_str.c_str(), FILE_ATTRIBUTE_NORMAL);
 	//std::ofstream myfile("profile.txt", ios::app);
    	std::ofstream archivo(archivo_str.c_str(), ios::app); // Abre el archivo en modo de escritura y posiciona el puntero al final
    	if (archivo.is_open()) {
@@ -821,6 +1022,9 @@ void agrega_perfil(string texto){
 	} else {
 	   cout << "Error al abrir el archivo en modo de escritura." << endl;
 	}
+	
+	//Se pone el archivo en modo oculto para que no pueda ser modificado:
+	SetFileAttributes(archivo_str.c_str(), FILE_ATTRIBUTE_HIDDEN);
 }
 avl *avl::update(avl *root)
 {
@@ -1568,6 +1772,8 @@ int buscarpalabra(){
 	//Crea el menu y ciclo para traducir palabras
 		system("cls");
 		system("color 0a");
+		
+		//bordes();
 		gotoxy(50,9);
 		//cout<<"                                                         Para salir presione [0]"
 		gotoxy(50,10);
@@ -1859,8 +2065,34 @@ int buscarpalabra(){
 void intro(){
 	system("cls");
 	system("color 0a");
+	bordes();
+	gotoxy(50,10);
+	
+	/*std::string animatedText;
+	std::string introText ="UNIVERSIDAD MARIANO GALVEZ DE GUATEMALA";
+    for (size_t i = 0; i < introText.size(); ++i) {
+	    gotoxy(50,10);
+		animatedText += introText[i];
+	    std::cout << animatedText << std::endl;
+	    delay(10);
+	    system("cls");
+	}*/
 	gotoxy(50,10);
 	cout<<"UNIVERSIDAD MARIANO GALVEZ DE GUATEMALA"<<endl;
+	/*gotoxy(50,11);
+	//std::string animatedText;
+	//std::string 
+	introText ="FACULTAD DE INGENIERIA EN SISTEMAS";
+    for (size_t i = 0; i < introText.size(); ++i) {
+		gotoxy(50,10);
+		cout<<"UNIVERSIDAD MARIANO GALVEZ DE GUATEMALA"<<endl;
+	
+	    gotoxy(50,11);
+		animatedText += introText[i];
+	    std::cout << animatedText << std::endl;
+	    delay(10);
+	    system("cls");
+	}*/
 	gotoxy(50,11);
 	cout<<"FACULTAD DE INGENIERIA EN SISTEMAS"<<endl;
 	gotoxy(50,12);
@@ -1896,10 +2128,10 @@ void intro(){
 		//cout<<folder<<endl;
 		//cout<<"path ->"<<folder<<endl;
 		if (menu_sound==false) {
-			ires=PlaySound(folder, NULL, SND_FILENAME);
-			menu_sound=true;
+			//ires=PlaySound(folder, NULL, SND_FILENAME);
+			//menu_sound=true;
 		}
-	//Sleep(5000);
+	Sleep(3000);
 	root=NULL;
 	root=d.create(root);
 }
@@ -1914,6 +2146,7 @@ void Diccionario(){
     std::ifstream archivo("palabras.txt");
     std::string palabra;
     std::string palabra_traducida;
+    std::string index;
 	int icont=12;
 	//carga el diccionario
   	//Apertura de archivo y lectura de datos
@@ -1926,11 +2159,13 @@ void Diccionario(){
             
             Palabra palabra;
             //palabra=to_upper(palabra);
+			std::getline(ss, index, ',');
 			std::getline(ss, palabra.espanol, ',');
-            std::getline(ss, palabra.italiano, ',');
-            std::getline(ss, palabra.frances, ',');
-            std::getline(ss, palabra.aleman, ',');
             std::getline(ss, palabra.ingles, ',');
+			std::getline(ss, palabra.frances, ',');
+			std::getline(ss, palabra.aleman, ',');
+			std::getline(ss, palabra.italiano, ',');
+            
             palabras.push_back(palabra);
         }
         archivo.close();
@@ -2032,6 +2267,7 @@ void agrega(){
 void salida(){
 	system("cls");
 	system("color 0a");
+	//bordes();
 	gotoxy(50,15);
 	cout<<"      ___           ___           ___     "<<endl;
 	gotoxy(50,16);
@@ -2099,6 +2335,7 @@ void menu(){
 do{
 	TextColor(10);
 	system("cls");
+	bordes();
 	gotoxy(10,70);
   cout<<"usuario en sesion: "<<user<<endl;
 	Say(65,12,"TRADUCTOR");
@@ -2163,6 +2400,7 @@ void menu2 (){
 	do{
 		system("cls");
 		system("color 0a");
+		bordes();
 		gotoxy(50,10);
 		cout<<"######################################################################";
 		gotoxy(50,11);
@@ -2228,11 +2466,11 @@ void login(){
 		gotoxy(50,14);
 		cout<<"                       [1] Iniciar sesion"<<endl;
 		gotoxy(50,15);
-		cout<<"                       [2] Cambia Password"<<endl;
+		//cout<<"                       [2] Cambia Password"<<endl;
+		gotoxy(50,15);
+		cout<<"                       [2] Ingresar como invitado"<<endl;
 		gotoxy(50,16);
-		cout<<"                       [3] Ingresar como invitado"<<endl;
-		gotoxy(50,17);
-		cout<<"                       [4] Salir"<<endl;
+		cout<<"                       [3] Salir"<<endl;
 		gotoxy(50,18);
 		cout<<"                           [   ] "<<endl;
 		
@@ -2247,6 +2485,7 @@ void login(){
 		if(iopt==1){
 			//se tendra en una variable de entorno el usuario logueado y los datos de loguin se encriptan en un archivo de configuracion
 			system("cls");
+			bordes();
 			continua=false;
 			//encontrado=false;
 			gotoxy(50,10);
@@ -2339,27 +2578,27 @@ void login(){
 			}
 		} else {
 			//crea usuario
-			if(iopt==2){
+			if(iopt==4){
 				char *m1 =strdup("Esta opcion aun no esta habilitada");
 				char *m2 = strdup("Error");
-				if(iopt!=4) MSGBOX(m1 ,m2 );
+				if(iopt!=3) MSGBOX(m1 ,m2 );
 				//menu();
 			} else {
 			
 				//invitado
-				if(iopt==3){
+				if(iopt==2){
 					user="Invitado";
 					menu();
 				} else {
 					char *m1 =strdup("Opcion no valida");
 					char *m2 = strdup("Error");
-					if(iopt!=4) MSGBOX(m1 ,m2 );
+					if(iopt!=3) MSGBOX(m1 ,m2 );
 				}
 			}
 		
 		}
 		
-	} while (iopt!=4);
+	} while (iopt!=3);
 	salida();
 //	system("pause");
 }
@@ -2378,12 +2617,16 @@ int main() {
 	system("del c:\\lib\\voices\\205.wav /s");
 	system("cls");
 	//carga();
+	//intro_esp();
 	fullscreen();
+	product_intro();
 	//defaults();
 	//buscarpalabra();
 	//system("pause");
 	//fullscreen();
 	intro();
+	
+	
 	carga();
 	//carga_diccionario();
 	login();
